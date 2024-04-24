@@ -1,0 +1,119 @@
+HR gpid 1
+usr 	: aris
+pw	: 240184
+
+--------------------
+
+KOOR gpid 2
+usr 	: gafar
+pw	: 123
+
+--------------------
+
+SPV gpid 7
+usr 	: suryanti
+pw	: 123
+
+--------------------
+
+scurity gpid 13
+usr 	: troy
+pw	: 210772
+
+--------------------
+
+kry gpid 10
+usr 	: boim
+pw	: 170574
+
+--------------------
+query select berdasarkan group_id
+select * from tbmuser order by group_id ASC
+--------------------
+
+
+
+--------------------
+query create gatepass
+INSERT INTO tb_requested(employee_id) 
+VALUES(1193);
+
+INSERT INTO tb_recommended(employee_id) 
+VALUES(1375);
+
+INSERT INTO tb_approved(employee_id) 
+VALUES(231);
+
+INSERT INTO tb_acknowledged(employee_id) 
+VALUES(4331);
+
+INSERT INTO tb_time(est_time_out, est_time_in) 
+VALUES(current_timestamp,'2023-10-02 11:38:20');
+
+INSERT INTO tb_pengesahan(id_requested,id_recommended,id_approved,id_acknowledged) 
+VALUES(1,1,1,1);
+
+INSERT INTO tb_gatepass(id_pengesahan,id_time,tanggal_gatepass,keperluan,penjelasan_keperluan,status) 
+VALUES(1,1,current_timestamp,'sakit','sakit maag belum sahur', 'waiting');
+--------------------
+
+
+
+
+
+
+
+
+523124075
+= FIRMAN BARUS
+
+
+4600318
+= M SUNARTO
+
+4698073
+= AGUS WIDODO
+
+521073730
+= MARDEN
+
+46171029
+= ARIS
+
+46211035
+= HARYANTO
+
+521073730
+= MARDEN
+
+46191033
+=JULIANTO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
