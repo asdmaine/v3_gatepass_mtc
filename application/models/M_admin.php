@@ -874,9 +874,9 @@ class M_admin extends CI_Model
         );
         return $query->result();
     }
-    public function NumHistoryToday($pst_pnr)
+    public function NumHistoryToday($pst_pnr,$tanggal_gatepass)
     {
-        $date = date('Y-m-d');
+       
         $query = $this->db->query(
             "
             SELECT 
@@ -892,7 +892,7 @@ class M_admin extends CI_Model
         AND 
             a.status != 2
         AND 
-        DATE_FORMAT(a.tanggal_gatepass_dibuat, '%Y-%m-%d') = '$date'
+        DATE_FORMAT(a.tanggal_gatepass, '%Y-%m-%d') = '$tanggal_gatepass'
         "
         );
         return $query->num_rows();

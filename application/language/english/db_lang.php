@@ -3,7 +3,7 @@
 
 // DASHBOARD
 $lang['Akses ditolak']='Access Rejected';
-$lang['Anda sudah gatepass hari ini']='You already gatepass today';
+$lang['Anda sudah gatepass hari ini']='You already request gatepass today';
 $lang['Gatepass anda Bulan ini'] = 'Your Gatepass this month';
 $lang['Gatepass anda Bulan lalu'] = 'Your Gatepass previous month';
 $lang['Gatepass anda Tahun ini'] = 'Your Gatepass this year';

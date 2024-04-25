@@ -29,7 +29,7 @@ class Submit extends CI_Controller
 	{
 		$post = $this->input->post();
 		$string = $this->logindata['user']['pst_pnr'];
-		$row = $this->m_admin->NumHistoryToday($string);
+		$row = $this->m_admin->NumHistoryToday($string,$post['tanggal']);
 		if ($row > 0) {
 			redirect('dashboard?alert=limit');
 		} else {
