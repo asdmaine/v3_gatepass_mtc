@@ -22,13 +22,13 @@ class All_History extends CI_Controller
 	{
 		$year_now = date('Y');
 		$this->data['Gatepass'] = $this->m_admin->GetHistoryYear($year_now);
-		$this->sidebar->view('public/history/All_History', array_merge($this->logindata, $this->data));
+		$this->sidebar->view('public/history/All_history', array_merge($this->logindata, $this->data));
 	}
 	public function from($year)
 	{
 		$this->data['Gatepass'] = $this->m_admin->GetHistoryYear($year);
 		$this->data['year'] = $year;
-		$this->sidebar->view('public/history/All_History', array_merge($this->logindata, $this->data));
+		$this->sidebar->view('public/history/All_history', array_merge($this->logindata, $this->data));
 	}
 	public function detail($qrcode = '0')
 	{
