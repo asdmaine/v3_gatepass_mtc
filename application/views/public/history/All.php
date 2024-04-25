@@ -69,7 +69,7 @@
                   <?php } ?>
                   <td class="text-center">
                     <div class="btn btn-secondary m-1"
-                      onclick="window.open('<?= base_url('all_history/detail/' . $hs->qrcode) ?>','_self');">
+                      onclick="window.open('<?= base_url('all/detail/' . $hs->qrcode) ?>','_self');">
                       <i class="fa-solid fa-print"></i>
                     </div>
                   </td>
@@ -97,7 +97,7 @@
 
     function YearSelector(select) {
       var selectedYear = select.options[select.selectedIndex].value;
-      window.open('<?= base_url('all_history/from/') ?>' + selectedYear, '_self')
+      window.open('<?= base_url('history/from/') ?>' + selectedYear, '_self')
     }
   </script>
 </body>

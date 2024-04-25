@@ -90,7 +90,7 @@
               </a>
               <?php
               if (isset($this->logindata['hr'])) { ?>
-                <a href="<?= base_url("all_history") ?>" class="subsidebar-link">
+                <a href="<?= base_url("all") ?>" class="subsidebar-link">
                   <i class="fa-regular fa-calendar-check fa-fw mr-2"></i>
                   All Gatepass History
                 </a>
@@ -114,7 +114,7 @@
           <!-- <?php
           if ($this->logindata['level'] == 'hrd') { ?>
             <li class="sidebar-item border-top">
-              <a href="<?= base_url("all_history") ?>" class="sidebar-link">
+              <a href="<?= base_url("all") ?>" class="sidebar-link">
                 <i class="fa-solid fa-clock-rotate-left fa-fw mr-2"></i>
                 All Gatepass History
               </a>
