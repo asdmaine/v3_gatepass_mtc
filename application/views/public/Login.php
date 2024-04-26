@@ -171,7 +171,7 @@
     var divs = document.querySelectorAll('.akun');
 
     // Iterasi melalui setiap elemen div
-    divs.forEach(function(div) {
+    Array.from(divs).forEach(function(div) {
         // Tambahkan event listener untuk setiap div
         div.addEventListener('click', function() {
             // Ambil nilai dari atribut data-pst

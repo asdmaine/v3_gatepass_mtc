@@ -321,8 +321,9 @@
     // untk datatables
     new DataTable('#example');
 
-    document.querySelectorAll('.btn-edit').forEach(function (btn) {
-      btn.addEventListener("click", function () {
+    var buttons = document.querySelectorAll(".btn-edit");
+    Array.from(buttons).forEach(function (button) {
+      button.addEventListener("click", function () {
         var idverifikasi = this.getAttribute("data-id_verifikasi");
         var idgatepass = this.getAttribute("data-id_gatepass");
         var idremarks = this.getAttribute("data-id_remarks");

@@ -392,7 +392,7 @@
 
 
   var modalButtons = document.querySelectorAll("#OpenModalInfo");
-  modalButtons.forEach(function (button) {
+  Array.from(modalButtons).forEach(function (button) {
     button.addEventListener("click", function () {
       // Ambil konten dari atribut data-content
       var content = this.getAttribute("data-content");

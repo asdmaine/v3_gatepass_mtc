@@ -209,6 +209,7 @@ class M_admin extends CI_Model
         $this->db->join('pst f3', 'c.acknowledgedby_pst_pnr = f3.pst_pnr', 'left');
         $this->db->where('c.requestedby_pst_pnr', $pst_pnr);
         $this->db->where("a.status", 0);
+        $this->db->order_by('a.id_gatepass', 'ASC');
 
         $query = $this->db->get();
         return $query->result();
