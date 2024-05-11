@@ -49,6 +49,12 @@
                         <form action="<?= base_url('mail/upSignatureFromMail') ?>" method="post">
                             <div class="row">
                                 <div class="col-md-12">
+                                  <input type="text" name="what" value="<?= $what ?>" hidden>
+                                  <input type="text" name="as" value="<?= $as ?>" hidden>
+                                  <input type="text" name="qrcode" value="<?= $qrcode ?>" hidden>
+                                  <input type="text" name="id_verifikasi" value="<?= $id_verifikasi ?>" hidden>
+                                  <input type="text" name="id_gatepass" value="<?= $id_gatepass ?>" hidden>
+                                
                                     <textarea id="sig-dataUrl" class="form-control" name="signature" rows="5" hidden
                                         required></textarea>
                                     <textarea class="form-control" name="pst_pnr" rows="5"

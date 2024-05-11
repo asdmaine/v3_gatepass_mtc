@@ -103,8 +103,10 @@ class Mail extends CI_Controller
 			redirect('dashboard?alert=ditolak');
 		} else {
 			$this->m_signature->SetSignatureFromMail();
+			redirect('mail/approve_from_mail/'.$post['what'].'/'.$post['as'].'/'.$post['qrcode'].'/'.$post['id_verifikasi'].'/'.$post['id_gatepass']);
 		}
 	}
+
 
 
 
