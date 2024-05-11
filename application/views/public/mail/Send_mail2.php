@@ -67,8 +67,7 @@ try {
   <body>
       <div>
           <h2>GATEPASS REQUEST</h2>
-          <!-- <h2>Pesan ini dikirim ke email milik' . $as . '@ptdsaw.co.id' . '</h2> -->
-          <h2>Pesan  ini dikirim ke ' . $as . '_mail@ptdsaw' . '</h2>
+          <h2>Pesan ini dikirim ke email milik ' . $as .'</h2>
           <table border="1">
               <thead>
                   <tr>
@@ -145,9 +144,7 @@ try {
   <body>
       <div>
           <h2>REQUEST GATEPASS ANDA ' . $status_gatepass . '</h2>
-          <!-- <h2>Pesan ini dikirim ke email milik' . $as . '@ptdsaw.co.id' . '</h2> -->
-          <h2>Pesan  ini dikirim ke ' . $as . '_mail@ptdsaw' . '</h2>
-
+          <h2>Pesan ini dikirim ke email milik ' . $as .'</h2>
           <table border="1">
               <thead>
                   <tr>

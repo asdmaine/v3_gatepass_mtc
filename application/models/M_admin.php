@@ -875,9 +875,9 @@ class M_admin extends CI_Model
         );
         return $query->result();
     }
-    public function NumHistoryToday($pst_pnr,$tanggal_gatepass)
+    public function NumHistoryToday($pst_pnr, $tanggal_gatepass)
     {
-       
+
         $query = $this->db->query(
             "
             SELECT 
@@ -897,6 +897,117 @@ class M_admin extends CI_Model
         "
         );
         return $query->num_rows();
+    }
+    public function getpstpnrfromgatepass($id_gatepass)
+    {
+        $query = $this->db->query(
+            "
+            SELECT a.id_pengesahan,b.*
+            FROM gatepass_tb a
+            LEFT JOIN gatepass_tbpengesahan b ON a.id_pengesahan = b.id_pengesahan
+            WHERE a.id_gatepass = '$id_gatepass';
+            "
+        );
+        return $query->result();
+    }
+    public function cekrecommended($id_verifikasi, $id_gatepass)
+    {
+        // cek status gatepass
+        $cekgatepass = $this->db->query(
+            "
+            select 
+                *
+            from
+                gatepass_tb
+            where
+                id_gatepass = '$id_gatepass';
+            "
+        );
+        $gp_status = $cekgatepass->result();
+
+        // cek status verifikasi
+        if ($gp_status[0]->status == '0') {
+            $query = $this->db->query(
+                "
+            select 
+                *
+            from
+                gatepass_tbverifikasi
+            where
+                id_verifikasi = '$id_verifikasi';
+            "
+            );
+            $status = $query->result();
+            return $status[0]->status_recommended;
+        } else {
+            echo '<script>alert("Permintaan gatepass telah berakhir"); window.close();</script>';
+        }
+    }
+    public function cekapproved($id_verifikasi, $id_gatepass)
+    {
+        // cek status gatepass
+        $cekgatepass = $this->db->query(
+            "
+            select 
+                *
+            from
+                gatepass_tb
+            where
+                id_gatepass = '$id_gatepass';
+            "
+        );
+        $gp_status = $cekgatepass->result();
+
+        // cek status verifikasi
+        if ($gp_status[0]->status == '0') {
+            $query = $this->db->query(
+                "
+            select 
+                *
+            from
+                gatepass_tbverifikasi
+            where
+                id_verifikasi = '$id_verifikasi';
+            "
+            );
+            $status = $query->result();
+            return $status[0]->status_approved;
+        } else {
+            echo '<script>alert("Permintaan gatepass telah berakhir"); window.close();</script>';
+        }
+    }
+    public function cekacknowledged($id_verifikasi, $id_gatepass)
+    {
+        // cek status gatepass
+        $cekgatepass = $this->db->query(
+            "
+            select 
+                *
+            from
+                gatepass_tb
+            where
+                id_gatepass = '$id_gatepass';
+            "
+        );
+        $gp_status = $cekgatepass->result();
+
+        // cek status verifikasi
+        if ($gp_status[0]->status == '0') {
+            $query = $this->db->query(
+                "
+            select 
+                *
+            from
+                gatepass_tbverifikasi
+            where
+                id_verifikasi = '$id_verifikasi';
+            "
+            );
+            $status = $query->result();
+            return $status[0]->status_acknowledged;
+        } else {
+            echo '<script>alert("Permintaan gatepass telah berakhir"); window.close();</script>';
+        }
     }
 
 }

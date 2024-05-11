@@ -545,21 +545,6 @@
         alert('<?=  $this->lang->line('Tidak Boleh kosong') ?>');
       }
     }, false);
-
-    // uploadBtn.addEventListener("click", function (e) {
-
-    //   document.getElementById("sig-submitBtn").click();
-    //   if (sigText.innerHTML === "") {
-    //     sigAlert.style.display = "block";
-    //     console.log('kosong');
-    //   } else {
-    //     sigAlert.style.display = "none";
-    //   }
-    // }, false);
-
-
-
-
   })();
 </script>
 <!-- Modal Info -->
