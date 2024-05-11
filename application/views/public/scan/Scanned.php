@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=0.4">
   <title>Scanned - Gatepass</title>
   <link rel="stylesheet" href="<?php echo base_url('src/assets/css/bootstrap.min.css'); ?>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -13,6 +13,7 @@
 <body>
   <main class="content px-4 py-4">
     <div class="container">
+      <img src="" alt="">
       <!-- <div class="row border border mb-4" style="">
         <div class="border border-secondary col-3 d-flex flex-column p-2">
           <img src="<?= base_url('src/assets/img/logo.png') ?>" class="m-auto" alt="" width=100 height=90>
@@ -80,9 +81,9 @@
           </tr>
           <tr>
             <td class="col-3"><strong>Perkiraan Jam Keluar</strong><br><i>Estimated Time Out</i></td>
-            <td class="col-3 align-middle"><mark><?= substr($Gatepass[0]->est_time_out,0,5) ?></mark></td>
+            <td class="col-3 align-middle"><mark><?= substr($Gatepass[0]->est_time_out, 0, 5) ?></mark></td>
             <td class="col-3"><strong>Perkiraan Jam Masuk</strong><br><i>Estimated Time In</i></td>
-            <td class="col-3 align-middle"><mark><?= substr($Gatepass[0]->est_time_in,0,5) ?></mark></td>
+            <td class="col-3 align-middle"><mark><?= substr($Gatepass[0]->est_time_in, 0, 5) ?></mark></td>
           </tr>
           <tr>
             <td colspan="4"><strong>Pengesahan</strong> / <i>Authorization</i></td>
@@ -104,10 +105,13 @@
             </td>
             <td class="align-bottom">Tanda tangan/Sign</td>
             <td class="text-center">
-
-            <?php if($Gatepass[0]->status_recommended == 1){?>
-              <img width="150" height="70" src="<?= $Gatepass[0]->recommended_signature ?>" alt="">
-              <?php }else{ ?> 
+              <?php if ($Gatepass[0]->status_recommended == 1) {
+                if ($Gatepass[0]->recommendedby_pst_pnr == '0') { ?>
+                  <img width="" height="" src="" alt="">
+                <?php } else { ?>
+                  <img width="150" height="70" src="<?= $Gatepass[0]->recommended_signature ?>" alt="">
+                <?php }
+              } else { ?>
                 <p class="btn btn-danger">rejected</p>
               <?php } ?>
             </td>
@@ -119,9 +123,13 @@
             </td>
             <td class="align-bottom">Tanda tangan/Sign</td>
             <td class="text-center">
-              <?php if($Gatepass[0]->status_approved == 1){?>
-              <img width="150" height="70" src="<?= $Gatepass[0]->approved_signature ?>" alt="">
-              <?php }else{ ?> 
+            <?php if ($Gatepass[0]->status_approved == 1) {
+                if ($Gatepass[0]->approvedby_pst_pnr == '0') { ?>
+                  <img width="" height="" src="" alt="">
+                <?php } else { ?>
+                  <img width="150" height="70" src="<?= $Gatepass[0]->approved_signature ?>" alt="">
+                <?php }
+              } else { ?>
                 <p class="btn btn-danger">rejected</p>
               <?php } ?>
             </td>
@@ -133,9 +141,9 @@
             </td>
             <td class="align-bottom">Tanda tangan/Sign</td>
             <td class="text-center">
-              <?php if($Gatepass[0]->status_acknowledged == 1){?>
-              <img width="150" height="70" src="<?= $Gatepass[0]->acknowledged_signature ?>" alt="">
-              <?php }else{ ?> 
+              <?php if ($Gatepass[0]->status_acknowledged == 1) { ?>
+                <img width="150" height="70" src="<?= $Gatepass[0]->acknowledged_signature ?>" alt="">
+              <?php } else { ?>
                 <p class="btn btn-danger">rejected</p>
               <?php } ?>
             </td>
@@ -149,7 +157,7 @@
                   <button class="btn btn-success" data-toggle="modal" data-target="#ModalOut">Set jam
                     keluar</button>
                 <?php } else {
-              echo substr($Gatepass[0]->real_time_out,0,5);
+              echo substr($Gatepass[0]->real_time_out, 0, 5);
             } ?></mark></td>
             <td><strong>Jam Masuk </strong> / <i>Time In</i></td>
             <td><mark><?php if (!isset($Gatepass[0]->real_time_in)) { ?>
@@ -157,7 +165,7 @@
                     jam
                     Masuk</button>
                 <?php } else {
-              echo substr($Gatepass[0]->real_time_in,0,5);
+              echo substr($Gatepass[0]->real_time_in, 0, 5);
             } ?></mark></td>
           </tr>
           <tr>
@@ -199,7 +207,7 @@
   <!-- modalOut -->
   <div class="modal fade" id="ModalOut" data-backdrop="static" data-keyboard="false" tabindex="-1"
     aria-labelledby="ModalOutLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="ModalOutLabel">Remarks</h5>
@@ -229,7 +237,7 @@
   <!-- modalIn -->
   <div class="modal fade" id="ModalIn" data-backdrop="static" data-keyboard="false" tabindex="-1"
     aria-labelledby="ModalInLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="ModalInLabel">Remarks</h5>

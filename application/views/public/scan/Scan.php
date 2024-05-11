@@ -25,6 +25,10 @@
       echo '<script>console.log("Gatepass tidak valid!")</script>';
       echo '<script>alert("Gatepass tidak valid!")</script>';
     }
+    if ($_GET['alert'] == 'gp-1') {
+      echo '<script>console.log("Gatepass anda ditolak!")</script>';
+      echo '<script>alert("Gatepass anda ditolak!")</script>';
+    }
   
 
     echo '<script>

@@ -34,9 +34,12 @@ class Scan extends CI_Controller
 			if (empty($this->data['Gatepass'])) {
 				redirect('scan?alert=gp0');
 			} else {
-				if ($this->data['Gatepass'][0]->status != 1) {
+				if ($this->data['Gatepass'][0]->status == 0) {
 					redirect('scan?alert=gp0');
-				} else {
+				} else if ($this->data['Gatepass'][0]->status == -1){
+					redirect('scan?alert=gp-1');
+				}
+				else {
 					//getsignature
 					$this->data['Gatepass'][0]->recommended_signature = $this->m_admin->GetSignature($this->data['Gatepass'][0]->recommendedby_pst_pnr);
 					$this->data['Gatepass'][0]->approved_signature = $this->m_admin->GetSignature($this->data['Gatepass'][0]->approvedby_pst_pnr);
