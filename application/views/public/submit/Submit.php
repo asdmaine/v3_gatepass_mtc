@@ -44,7 +44,7 @@
                 <!-- SHOW -->
                 <tr class="text">
                   <?php foreach ($Progress as $pg) {
-                  }
+                  
                   if (empty($pg->id_gatepass)) { ?>
                   <tr class="text">
                     <th class="text-center align-middle text-uppercase" colspan="7">no data to be shown</th>
@@ -157,13 +157,38 @@
                   </td>
                   <!-- END ACKNOWLEDGED -->
                   <td class="text-center spacing-2">
-                    <div class="btn btn-info m-1" data-toggle="modal" data-target=".ModalDetail"><i
+                    <div class="btn btn-info m-1" id="OpenModalProgress" data-tanggal="<?= $pg->tanggal_gatepass ?>"
+                        data-keperluan="<?= $pg->keperluan ?>" data-penjelasan="<?= $pg->penjelasan_keperluan ?>"
+                        data-est-time-out="<?= $pg->est_time_out ?>" data-est-time-in="<?= $pg->est_time_in ?>" data-recommended="<?= $content_recommended ?>" data-approved="<?= $content_approved ?>" data-acknowledged="<?= $content_acknowledged ?>"><i
                         class="fa-solid fa-circle-info"></i></div>
-                    <div class="btn btn-danger" data-toggle="modal" data-target="#ModalSure"><i
+                    <div class="btn btn-danger" data-toggle="modal" data-target="#ModalSure<?= $pg->id_gatepass ?>"><i
                         class="fa-solid fa-trash"></i></div>
                   </td>
                   </tr>
-                <?php } ?>
+                  <!-- Modal sure-->
+                  <div class="modal fade" id="ModalSure<?= $pg->id_gatepass ?>" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                    aria-labelledby="ModalSureLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="ModalSureLabel"><?= $this->lang->line('Apakah anda yakin?') ?></h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <?= $this->lang->line('Anda akan kehilangan progres dari gatepass anda') ?>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal"><?= $this->lang->line('Kembali') ?></button>
+                          <a href="<?= base_url('submit/do_delete/' . $pg->id_gatepass) ?>"
+                            class="btn btn-danger"><?= $this->lang->line('Hapus') ?></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <?php }} ?>
               </tbody>
             </table>
           </div>
@@ -180,29 +205,71 @@
   </div>
   </div>
 
-  <!-- Modal sure-->
-  <div class="modal fade" id="ModalSure" data-backdrop="static" data-keyboard="false" tabindex="-1"
-    aria-labelledby="ModalSureLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="ModalSureLabel"><?= $this->lang->line('Apakah anda yakin?') ?></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <?= $this->lang->line('Anda akan kehilangan progres dari gatepass anda') ?>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary"
-            data-dismiss="modal"><?= $this->lang->line('Kembali') ?></button>
-          <a href="<?= base_url('submit/do_delete/' . $pg->id_gatepass . '/' . $pg->id_pengesahan) ?>"
-            class="btn btn-danger"><?= $this->lang->line('Hapus') ?></a>
-        </div>
+  <!-- modal progress -->
+<div class="modal fade" id="ModalProgress" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content px-4">
+      <div class="modal-header">
+        <h5 class="modal-title w-100 text-center" id="exampleModalLabel">Detail Gatepaeess</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group mb-4">
+            <label for="tanggal" class="col-form-label font-weight-bold"><?= $this->lang->line('Tanggal') ?></label>
+            <input type="date" class="form-control w-50" id="isi-tanggal" disabled>
+          </div>
+          <div class="form-group mb-4 ">
+            <label class="form-label font-weight-bold"><?= $this->lang->line('Keperluan') ?></label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="" value="" disabled checked>
+              <label class="form-check-label text-uppercase" id="isi-keperluan" for=""></label>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <label for="penjelasan" class="form-label font-weight-bold"><?= $this->lang->line('Penjelasan') ?></label>
+            <textarea class="form-control" id="isi-penjelasan" style="height: 100px" disabled></textarea>
+          </div>
+          <div class="form-group mb-4">
+            <label class="form-label font-weight-bold"><?= $this->lang->line('Perkiraan waktu') ?></label><br>
+            <div class="input-group mb-1">
+              <input type="text" class="form-control text-light"
+                placeholder="<?= $this->lang->line('Perkiraan jam keluar') ?>" disabled>
+              <input class="form-control" type="time" id="isi_est_time_out" value="" disabled>
+            </div>
+            <div class="input-group mb-4">
+              <input type="text" class="form-control text-light"
+                placeholder="<?= $this->lang->line('Perkiraan jam masuk') ?>" disabled>
+              <input class="form-control" type="time" id="isi_est_time_in" value="" disabled>
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <label class="form-label font-weight-bold"><?= $this->lang->line('Pengesahan') ?></label><br>
+            <div class="input-group mb-1">
+              <input type="text" class="form-control text-light"
+                placeholder="Recommendedby" disabled>
+              <input class="form-control" type="text" id="isi_recommended" value="" disabled>
+            </div>
+            <div class="input-group mb-1">
+              <input type="text" class="form-control text-light"
+                placeholder="Approvedby" disabled>
+              <input class="form-control" type="text" id="isi_approved" value="" disabled>
+            </div>
+            <div class="input-group mb-4">
+              <input type="text" class="form-control text-light"
+                placeholder="Acknowledgedby" disabled>
+              <input class="form-control" type="text" id="isi_acknowledged" value="" disabled>
+            </div>
+          </div>
+          
+        </form>
       </div>
     </div>
   </div>
+</div>
 
   <!-- modal submit -->
   <div class="modal fade ModalSubmit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -344,54 +411,6 @@
   </div>
 
 
-  <!-- modal detail -->
-  <div class="modal fade ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content px-4">
-        <div class="modal-header">
-          <h5 class="modal-title w-100 text-center" id="exampleModalLabel">Detail Gatepass</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group mb-4">
-              <label for="tanggal" class="col-form-label font-weight-bold"><?= $this->lang->line('Tanggal') ?></label>
-              <input type="date" class="form-control w-50" id="tanggal" value="<?= $pg->tanggal_gatepass ?>" disabled>
-            </div>
-            <div class="form-group mb-4 ">
-              <label class="form-label font-weight-bold"><?= $this->lang->line('Keperluan') ?></label><br>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="<?= $pg->keperluan ?>" value="<?= $pg->keperluan ?>"
-                  disabled checked>
-                <label class="form-check-label text-uppercase" for="<?= $pg->keperluan ?>"><?= $pg->keperluan ?></label>
-              </div>
-            </div>
-            <div class="form-group mb-4">
-              <label for="penjelasan" class="form-label font-weight-bold"><?= $this->lang->line('Penjelasan') ?></label>
-              <textarea class="form-control" id="penjelasan" style="height: 100px"
-                disabled><?= $pg->penjelasan_keperluan ?></textarea>
-            </div>
-            <div class="form-group mb-4">
-              <label class="form-label font-weight-bold">Perkiraan Waktu</label><br>
-              <div class="input-group mb-1">
-                <input type="text" class="form-control text-light"
-                  placeholder="<?= $this->lang->line('Perkiraan jam keluar') ?>" disabled>
-                <input class="form-control" type="time" id="est_time_out" value="<?= $pg->est_time_out ?>" disabled>
-              </div>
-              <div class="input-group mb-4">
-                <input type="text" class="form-control text-light"
-                  placeholder="<?= $this->lang->line('Perkiraan jam masuk') ?>" disabled>
-                <input class="form-control" type="time" id="est_time_in" value="<?= $pg->est_time_in ?>" disabled>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <script>
     function resetForm() {
@@ -426,6 +445,20 @@
         document.getElementById('alert-time').style.display = 'none';
       }
     }
+    var modalButtonsProgress = document.querySelectorAll("#OpenModalProgress");
+    Array.from(modalButtonsProgress).forEach(function (button) {
+    button.addEventListener("click", function () {
+      document.querySelector('#isi-tanggal').value = this.getAttribute("data-tanggal");
+      document.querySelector('#isi-keperluan').innerHTML = this.getAttribute("data-keperluan");
+      document.querySelector('#isi-penjelasan').value = this.getAttribute("data-penjelasan");
+      document.querySelector('#isi_est_time_out').value = this.getAttribute("data-est-time-out");
+      document.querySelector('#isi_est_time_in').value = this.getAttribute("data-est-time-in");
+      document.querySelector('#isi_recommended').value = this.getAttribute("data-recommended");
+      document.querySelector('#isi_approved').value = this.getAttribute("data-approved");
+      document.querySelector('#isi_acknowledged').value = this.getAttribute("data-acknowledged");
+      $('#ModalProgress').modal('show');
+    });
+  });
   </script>
 </body>
 

@@ -18,8 +18,8 @@
   <?php
   if (isset($_GET['alert'])) {
     if ($_GET['alert'] == 'ditolak') {
-      echo '<script>console.log("'.$this->lang->line('Akses ditolak').'!")</script>';
-      echo '<script>alert("'.$this->lang->line('Akses ditolak').'!")</script>';
+      echo '<script>console.log("' . $this->lang->line('Akses ditolak') . '!")</script>';
+      echo '<script>alert("' . $this->lang->line('Akses ditolak') . '!")</script>';
       echo '<script>
     setTimeout(function() {
         var newUrl = window.location.href.split("?")[0];
@@ -28,8 +28,8 @@
 </script>';
     }
     if ($_GET['alert'] == 'limit') {
-      echo '<script>console.log("'.$this->lang->line('Anda sudah gatepass hari ini').'!")</script>';
-      echo '<script>alert("'.$this->lang->line('Anda sudah gatepass hari ini').'!")</script>';
+      echo '<script>console.log("' . $this->lang->line('Anda sudah gatepass hari ini') . '!")</script>';
+      echo '<script>alert("' . $this->lang->line('Anda sudah gatepass hari ini') . '!")</script>';
       echo '<script>
       setTimeout(function() {
           var newUrl = window.location.href.split("?")[0];
@@ -63,7 +63,7 @@
           background: linear-gradient(to right, #3498db, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
           " class=" d-flex flex-column p-4 shadow">
             <h3 class="mb-3"><?= $this->lang->line('Gatepass anda Bulan lalu') ?> (<?php $date = date('M', strtotime('-1 month'));
-            echo $date; ?>)
+               echo $date; ?>)
             </h3>
             <h2 class="font-weight-bold mb-0 text-right"><?= $last_month ?></h2>
           </div>
@@ -96,7 +96,7 @@
             background: linear-gradient(to right, #89253e, #3a6186); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             " class="d-flex flex-column p-4 shadow">
               <h3 class="mb-3"><?= $this->lang->line('Total Gatepass Karyawan Bulan lalu') ?> (<?php $date = date('M', strtotime('-1 month'));
-              echo $date; ?>)
+                 echo $date; ?>)
               </h3>
               <h2 class="font-weight-bold mb-0 text-right"><?= $all_last_month ?></h2>
             </div>
@@ -142,117 +142,143 @@
               <!-- SHOW -->
               <tr class="text">
                 <?php foreach ($Progress as $pg) {
-                }
-                if (empty($pg->id_gatepass)) { ?>
-                  <!-- <tr class="text">
+
+                  if (empty($pg->id_gatepass)) { ?>
+                    <!-- <tr class="text">
                   <th class="text-center align-middle text-uppercase" colspan="7">no data to be shown</th>
                 </tr> -->
-                <?php } else {
-                  $recommended_name = $pg->recommended_name;
-                  $approved_name = $pg->approved_name;
-                  $acknowledged_name = $pg->acknowledged_name;
-                  $verif_date_recommendedby = $pg->verif_date_recommendedby;
-                  $verif_date_approvedby = $pg->verif_date_approvedby;
-                  $verif_date_acknowledgedby = $pg->verif_date_acknowledgedby;
-                  $status_recommended = $pg->status_recommended;
-                  $status_approved = $pg->status_approved;
-                  $status_acknowledged = $pg->status_acknowledged;
-                  ?>
-                  <th class="text-center align-middle">1</th>
-                  <td class="text-center align-middle">
-                    <?= $pg->tanggal_gatepass ?>
-                  </td>
-                  <td class="align-middle text-uppercase">
-                    <?= $pg->keperluan ?>
-                  </td>
-                  <!-- RECOMMENDED -->
-                  <td class="text-center">
-                    <?php if ($status_recommended == 1) { ?>
-                      <div class="btn btn-success" id="OpenModalInfo" data-content="<?php $content_recommended = 'Accepted by ' . $recommended_name . ' at ' . $verif_date_recommendedby;
-                      echo $content_recommended; ?>">
-                        Accepted</div>
-                    <?php } elseif ($status_recommended == 0) {
-                      $status_approved = 0;
-                      $approved_name = $recommended_name;
-                      $verif_date_approvedby = $verif_date_recommendedby;
-                      $status_acknowledged = 0;
-                      $acknowledged_name = $recommended_name;
-                      $verif_date_acknowledgedby = $verif_date_recommendedby;
-                      ?>
-                      <div class="btn btn-secondary" id="OpenModalInfo" data-content="<?php $content_recommended = 'Still waiting ' . $recommended_name;
-                      echo $content_recommended;
-                      $content_approved = $content_recommended;
-                      $content_acknowledged = $content_recommended; ?>">Waiting</div>
-                    <?php } elseif ($status_recommended == -1) {
-                      $status_approved = -1;
-                      $approved_name = $recommended_name;
-                      $verif_date_approvedby = $verif_date_recommendedby;
-                      $status_acknowledged = -1;
-                      $acknowledged_name = $recommended_name;
-                      $verif_date_acknowledgedby = $verif_date_recommendedby;
-                      ?>
-                      <div class="btn btn-danger" id="OpenModalInfo" data-content="<?php $content_recommended = 'Rejected by ' . $recommended_name . ' at ' . $verif_date_recommendedby;
-                      echo $content_recommended;
-                      $content_approved = $content_recommended;
-                      $content_acknowledged = $content_recommended; ?>">
-                        Rejected</div>
-                    <?php } ?>
-                  </td>
-                  <!-- END RECOMMENDED -->
+                  <?php } else {
+                    $recommended_name = $pg->recommended_name;
+                    $approved_name = $pg->approved_name;
+                    $acknowledged_name = $pg->acknowledged_name;
+                    $verif_date_recommendedby = $pg->verif_date_recommendedby;
+                    $verif_date_approvedby = $pg->verif_date_approvedby;
+                    $verif_date_acknowledgedby = $pg->verif_date_acknowledgedby;
+                    $status_recommended = $pg->status_recommended;
+                    $status_approved = $pg->status_approved;
+                    $status_acknowledged = $pg->status_acknowledged;
+                    ?>
+                    <th class="text-center align-middle">1</th>
+                    <td class="text-center align-middle">
+                      <?= $pg->tanggal_gatepass ?>
+                    </td>
+                    <td class="align-middle text-uppercase">
+                      <?= $pg->keperluan ?>
+                    </td>
+                    <!-- RECOMMENDED -->
+                    <td class="text-center">
+                      <?php if ($status_recommended == 1) { ?>
+                        <div class="btn btn-success" id="OpenModalInfo" data-content="<?php $content_recommended = 'Accepted by ' . $recommended_name . ' at ' . $verif_date_recommendedby;
+                        echo $content_recommended; ?>">
+                          Accepted</div>
+                      <?php } elseif ($status_recommended == 0) {
+                        $status_approved = 0;
+                        $approved_name = $recommended_name;
+                        $verif_date_approvedby = $verif_date_recommendedby;
+                        $status_acknowledged = 0;
+                        $acknowledged_name = $recommended_name;
+                        $verif_date_acknowledgedby = $verif_date_recommendedby;
+                        ?>
+                        <div class="btn btn-secondary" id="OpenModalInfo" data-content="<?php $content_recommended = 'Still waiting ' . $recommended_name;
+                        echo $content_recommended;
+                        $content_approved = $content_recommended;
+                        $content_acknowledged = $content_recommended; ?>">Waiting</div>
+                      <?php } elseif ($status_recommended == -1) {
+                        $status_approved = -1;
+                        $approved_name = $recommended_name;
+                        $verif_date_approvedby = $verif_date_recommendedby;
+                        $status_acknowledged = -1;
+                        $acknowledged_name = $recommended_name;
+                        $verif_date_acknowledgedby = $verif_date_recommendedby;
+                        ?>
+                        <div class="btn btn-danger" id="OpenModalInfo" data-content="<?php $content_recommended = 'Rejected by ' . $recommended_name . ' at ' . $verif_date_recommendedby;
+                        echo $content_recommended;
+                        $content_approved = $content_recommended;
+                        $content_acknowledged = $content_recommended; ?>">
+                          Rejected</div>
+                      <?php } ?>
+                    </td>
+                    <!-- END RECOMMENDED -->
 
-                  <!-- APROVED -->
-                  <td class="text-center">
-                    <?php if ($status_approved == 1) { ?>
-                      <div class="btn btn-success" id="OpenModalInfo" data-content="<?php $content_approved = 'Accepted by ' . $approved_name . ' at ' . $verif_date_approvedby;
-                      echo $content_approved; ?>">
-                        Accepted</div>
-                    <?php } elseif ($status_approved == 0) {
-                      $status_acknowledged = 0;
-                      $acknowledged_name = $approved_name;
-                      $verif_date_acknowledgedby = $verif_date_approvedby;
-                      ?>
-                      <div class="btn btn-secondary" id="OpenModalInfo" data-content="<?php $content_approved = 'Still waiting ' . $approved_name;
-                      echo $content_approved;
-                      $content_acknowledged = $content_approved; ?>">
-                        Waiting</div>
-                    <?php } elseif ($status_approved == -1) {
-                      $status_acknowledged = -1;
-                      $acknowledged_name = $approved_name;
-                      $verif_date_acknowledgedby = $verif_date_approvedby;
-                      ?>
-                      <div class="btn btn-danger" id="OpenModalInfo" data-content="<?php $content_approved = 'Rejected by ' . $approved_name . ' at ' . $verif_date_approvedby;
-                      echo $content_approved;
-                      $content_acknowledged = $content_approved; ?>">
-                        Rejected</div>
-                    <?php } ?>
-                  </td>
-                  <!-- END APPROVED -->
+                    <!-- APROVED -->
+                    <td class="text-center">
+                      <?php if ($status_approved == 1) { ?>
+                        <div class="btn btn-success" id="OpenModalInfo" data-content="<?php $content_approved = 'Accepted by ' . $approved_name . ' at ' . $verif_date_approvedby;
+                        echo $content_approved; ?>">
+                          Accepted</div>
+                      <?php } elseif ($status_approved == 0) {
+                        $status_acknowledged = 0;
+                        $acknowledged_name = $approved_name;
+                        $verif_date_acknowledgedby = $verif_date_approvedby;
+                        ?>
+                        <div class="btn btn-secondary" id="OpenModalInfo" data-content="<?php $content_approved = 'Still waiting ' . $approved_name;
+                        echo $content_approved;
+                        $content_acknowledged = $content_approved; ?>">
+                          Waiting</div>
+                      <?php } elseif ($status_approved == -1) {
+                        $status_acknowledged = -1;
+                        $acknowledged_name = $approved_name;
+                        $verif_date_acknowledgedby = $verif_date_approvedby;
+                        ?>
+                        <div class="btn btn-danger" id="OpenModalInfo" data-content="<?php $content_approved = 'Rejected by ' . $approved_name . ' at ' . $verif_date_approvedby;
+                        echo $content_approved;
+                        $content_acknowledged = $content_approved; ?>">
+                          Rejected</div>
+                      <?php } ?>
+                    </td>
+                    <!-- END APPROVED -->
 
-                  <!-- ACKNOWLEDGED -->
-                  <td class="text-center">
-                    <?php if ($status_acknowledged == 0) { ?>
-                      <div class="btn btn-secondary" id="OpenModalInfo" data-content="<?php $content_acknowledged = 'Still waiting ' . $acknowledged_name;
-                      echo $content_acknowledged; ?>">
-                        Waiting</div>
-                    <?php } elseif ($status_acknowledged == 1) { ?>
-                      <div class="btn btn-success" id="OpenModalInfo" data-content="<?php $content_acknowledged = 'Accepted by ' . $acknowledged_name . ' at ' . $verif_date_acknowledgedby;
-                      echo $content_acknowledged; ?>">
-                        Accepted</div>
-                    <?php } elseif ($status_acknowledged == -1) { ?>
-                      <div class="btn btn-danger" id="OpenModalInfo" data-content="<?php $content_acknowledged = 'Rejected by ' . $acknowledged_name . ' at ' . $verif_date_acknowledgedby;
-                      echo $content_acknowledged; ?>">
-                        Rejected</div>
-                    <?php } ?>
-                  </td>
-                  <!-- END ACKNOWLEDGED -->
-                  <td class="text-center spacing-2">
-                    <div class="btn btn-info m-1" data-toggle="modal" data-target=".ModalDetail"><i
-                        class="fa-solid fa-circle-info"></i></div>
-                    <div class="btn btn-danger" data-toggle="modal" data-target="#ModalSure"><i
-                        class="fa-solid fa-trash"></i></div>
-                  </td>
-                </tr>
-              <?php } ?>
+                    <!-- ACKNOWLEDGED -->
+                    <td class="text-center">
+                      <?php if ($status_acknowledged == 0) { ?>
+                        <div class="btn btn-secondary" id="OpenModalInfo" data-content="<?php $content_acknowledged = 'Still waiting ' . $acknowledged_name;
+                        echo $content_acknowledged; ?>">
+                          Waiting</div>
+                      <?php } elseif ($status_acknowledged == 1) { ?>
+                        <div class="btn btn-success" id="OpenModalInfo" data-content="<?php $content_acknowledged = 'Accepted by ' . $acknowledged_name . ' at ' . $verif_date_acknowledgedby;
+                        echo $content_acknowledged; ?>">
+                          Accepted</div>
+                      <?php } elseif ($status_acknowledged == -1) { ?>
+                        <div class="btn btn-danger" id="OpenModalInfo" data-content="<?php $content_acknowledged = 'Rejected by ' . $acknowledged_name . ' at ' . $verif_date_acknowledgedby;
+                        echo $content_acknowledged; ?>">
+                          Rejected</div>
+                      <?php } ?>
+                    </td>
+                    <!-- END ACKNOWLEDGED -->
+                    <td class="text-center spacing-2">
+                      <div class="btn btn-info m-1" id="OpenModalProgress" data-tanggal="<?= $pg->tanggal_gatepass ?>"
+                        data-keperluan="<?= $pg->keperluan ?>" data-penjelasan="<?= $pg->penjelasan_keperluan ?>"
+                        data-est-time-out="<?= $pg->est_time_out ?>" data-est-time-in="<?= $pg->est_time_in ?>" data-recommended="<?= $content_recommended ?>" data-approved="<?= $content_approved ?>" data-acknowledged="<?= $content_acknowledged ?>"><i
+                          class="fa-solid fa-circle-info"></i></div>
+                      <div class="btn btn-danger" data-toggle="modal" data-target="#ModalSure<?= $pg->id_gatepass ?>"><i
+                          class="fa-solid fa-trash"></i></div>
+                    </td>
+                  </tr>
+                  <!-- Modal sure-->
+                  <div class="modal fade" id="ModalSure<?= $pg->id_gatepass ?>" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                    aria-labelledby="ModalSureLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="ModalSureLabel"><?= $this->lang->line('Apakah anda yakin?') ?></h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <?= $this->lang->line('Anda akan kehilangan progres dari gatepass anda') ?>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal"><?= $this->lang->line('Kembali') ?></button>
+                          <a href="<?= base_url('submit/do_delete/' . $pg->id_gatepass) ?>"
+                            class="btn btn-danger"><?= $this->lang->line('Hapus') ?></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <?php }
+                } ?>
             </tbody>
           </table>
         </div>
@@ -321,7 +347,8 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title w-100 text-center" id="exampleModalLabel"><?= $this->lang->line('Set Signature') ?></h5>
+              <h5 class="modal-title w-100 text-center" id="exampleModalLabel"><?= $this->lang->line('Set Signature') ?>
+              </h5>
               <button id="x-btn" type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -345,8 +372,8 @@
                 <form action="<?= base_url('dashboard/upSignature') ?>" method="post">
                   <div class="row">
                     <div class="col-md-12">
-                      <textarea id="sig-dataUrl" class="form-control" name="signature" rows="5" 
-                       hidden required></textarea>
+                      <textarea id="sig-dataUrl" class="form-control" name="signature" rows="5" hidden
+                        required></textarea>
                       <textarea class="form-control" name="pst_pnr" rows="5"
                         hidden><?= $this->logindata['user']['pst_pnr'] ?></textarea>
                     </div>
@@ -358,7 +385,8 @@
                         style="max-width: 100%;" />
                     </div>
                   </div>
-                  <p id="sig-alert" class="text-danger" style="display:none;"><?= $this->lang->line('ekan Tombol Selesai terlebih dahulu') ?></p>
+                  <p id="sig-alert" class="text-danger" style="display:none;">
+                    <?= $this->lang->line('ekan Tombol Selesai terlebih dahulu') ?></p>
 
               </div>
             </div>
@@ -391,17 +419,7 @@
   });
 
 
-  var modalButtons = document.querySelectorAll("#OpenModalInfo");
-  Array.from(modalButtons).forEach(function (button) {
-    button.addEventListener("click", function () {
-      // Ambil konten dari atribut data-content
-      var content = this.getAttribute("data-content");
-      // Tampilkan modal
-      $('#ModalInfo').modal('show');
-      // Masukkan konten ke dalam modal
-      document.querySelector('#isi-modal').innerText = content;
-    });
-  });
+
 
 
 
@@ -536,16 +554,42 @@
 
     submitBtn.addEventListener("click", function (e) {
       var dataUrl = canvas.toDataURL('image/png');
-      if(dataUrl != 'data:image/png;base64,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'){
+      if (dataUrl != 'data:image/png;base64,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') {
         sigText.innerHTML = dataUrl;
         sigImage.setAttribute("src", dataUrl);
         sigAlert.style.display = "none";
         uploadBtn.click();
-      }else{
-        alert('<?=  $this->lang->line('Tidak Boleh kosong') ?>');
+      } else {
+        alert('<?= $this->lang->line('Tidak Boleh kosong') ?>');
       }
     }, false);
   })();
+
+  var modalButtons = document.querySelectorAll("#OpenModalInfo");
+  var modalButtonsProgress = document.querySelectorAll("#OpenModalProgress");
+  Array.from(modalButtons).forEach(function (button) {
+    button.addEventListener("click", function () {
+      // Ambil konten dari atribut data-content
+      var content = this.getAttribute("data-content");
+      // Tampilkan modal
+      $('#ModalInfo').modal('show');
+      // Masukkan konten ke dalam modal
+      document.querySelector('#isi-modal').innerText = content;
+    });
+  });
+  Array.from(modalButtonsProgress).forEach(function (button) {
+    button.addEventListener("click", function () {
+      document.querySelector('#isi-tanggal').value = this.getAttribute("data-tanggal");
+      document.querySelector('#isi-keperluan').innerHTML = this.getAttribute("data-keperluan");
+      document.querySelector('#isi-penjelasan').value = this.getAttribute("data-penjelasan");
+      document.querySelector('#isi_est_time_out').value = this.getAttribute("data-est-time-out");
+      document.querySelector('#isi_est_time_in').value = this.getAttribute("data-est-time-in");
+      document.querySelector('#isi_recommended').value = this.getAttribute("data-recommended");
+      document.querySelector('#isi_approved').value = this.getAttribute("data-approved");
+      document.querySelector('#isi_acknowledged').value = this.getAttribute("data-acknowledged");
+      $('#ModalProgress').modal('show');
+    });
+  });
 </script>
 <!-- Modal Info -->
 <div class="modal fade" id="ModalInfo" tabindex="-1" role="dialog" aria-labelledby="ModalInfoLabel" aria-hidden="true">
@@ -558,35 +602,15 @@
   </div>
 </div>
 
-<!-- Modal sure-->
-<div class="modal fade" id="ModalSure" data-backdrop="static" data-keyboard="false" tabindex="-1"
-  aria-labelledby="ModalSureLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ModalSureLabel"><?= $this->lang->line('Apakah anda yakin?') ?></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <?= $this->lang->line('Anda akan kehilangan progres dari gatepass anda') ?>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"><?= $this->lang->line('Kembali') ?></button>
-        <a href="<?= base_url('submit/do_delete/' . $pg->id_gatepass) ?>"
-          class="btn btn-danger"><?= $this->lang->line('Hapus') ?></a>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- modal detail -->
-<div class="modal fade ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+<!-- modal progress -->
+<div class="modal fade" id="ModalProgress" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content px-4">
       <div class="modal-header">
-        <h5 class="modal-title w-100 text-center" id="exampleModalLabel">Detail Gatepass</h5>
+        <h5 class="modal-title w-100 text-center" id="exampleModalLabel">Detail Gatepaeess</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -595,32 +619,51 @@
         <form>
           <div class="form-group mb-4">
             <label for="tanggal" class="col-form-label font-weight-bold"><?= $this->lang->line('Tanggal') ?></label>
-            <input type="date" class="form-control w-50" id="tanggal" value="<?= $pg->tanggal_gatepass ?>" disabled>
+            <input type="date" class="form-control w-50" id="isi-tanggal" disabled>
           </div>
           <div class="form-group mb-4 ">
             <label class="form-label font-weight-bold"><?= $this->lang->line('Keperluan') ?></label><br>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="<?= $pg->keperluan ?>" value="<?= $pg->keperluan ?>"
-                disabled checked>
-              <label class="form-check-label text-uppercase" for="<?= $pg->keperluan ?>"><?= $pg->keperluan ?></label>
+              <input class="form-check-input" type="radio" id="" value="" disabled checked>
+              <label class="form-check-label text-uppercase" id="isi-keperluan" for=""></label>
             </div>
           </div>
           <div class="form-group mb-4">
             <label for="penjelasan" class="form-label font-weight-bold"><?= $this->lang->line('Penjelasan') ?></label>
-            <textarea class="form-control" id="penjelasan" style="height: 100px"
-              disabled><?= $pg->penjelasan_keperluan ?></textarea>
+            <textarea class="form-control" id="isi-penjelasan" style="height: 100px" disabled></textarea>
           </div>
           <div class="form-group mb-4">
             <label class="form-label font-weight-bold"><?= $this->lang->line('Perkiraan waktu') ?></label><br>
             <div class="input-group mb-1">
-              <input type="text" class="form-control text-light" placeholder="<?= $this->lang->line('Perkiraan jam keluar') ?>" disabled>
-              <input class="form-control" type="time" id="est_time_out" value="<?= $pg->est_time_out ?>" disabled>
+              <input type="text" class="form-control text-light"
+                placeholder="<?= $this->lang->line('Perkiraan jam keluar') ?>" disabled>
+              <input class="form-control" type="time" id="isi_est_time_out" value="" disabled>
             </div>
             <div class="input-group mb-4">
-              <input type="text" class="form-control text-light" placeholder="<?= $this->lang->line('Perkiraan jam masuk') ?>" disabled>
-              <input class="form-control" type="time" id="est_time_in" value="<?= $pg->est_time_in ?>" disabled>
+              <input type="text" class="form-control text-light"
+                placeholder="<?= $this->lang->line('Perkiraan jam masuk') ?>" disabled>
+              <input class="form-control" type="time" id="isi_est_time_in" value="" disabled>
             </div>
           </div>
+          <div class="form-group mb-4">
+            <label class="form-label font-weight-bold"><?= $this->lang->line('Pengesahan') ?></label><br>
+            <div class="input-group mb-1">
+              <input type="text" class="form-control text-light"
+                placeholder="Recommendedby" disabled>
+              <input class="form-control" type="text" id="isi_recommended" value="" disabled>
+            </div>
+            <div class="input-group mb-1">
+              <input type="text" class="form-control text-light"
+                placeholder="Approvedby" disabled>
+              <input class="form-control" type="text" id="isi_approved" value="" disabled>
+            </div>
+            <div class="input-group mb-4">
+              <input type="text" class="form-control text-light"
+                placeholder="Acknowledgedby" disabled>
+              <input class="form-control" type="text" id="isi_acknowledged" value="" disabled>
+            </div>
+          </div>
+          
         </form>
       </div>
     </div>

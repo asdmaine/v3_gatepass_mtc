@@ -229,7 +229,7 @@ class M_admin extends CI_Model
             }
             if ($post['recommended'] == '0') {
                 if ($post['approved'] == '0') {
-                    $data = array('status_approved' => 1);
+                    $data = array('status_approved' => 2);
                     $this->db->where('id_verifikasi', $id_verifikasi);
                     $this->db->update('gatepass_tbverifikasi', $data);
                     redirect('mail/push/acknowledged/' . $qrcode . '/dashboard');
