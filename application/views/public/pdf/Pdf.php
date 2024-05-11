@@ -21,6 +21,11 @@ $pdf->AddPage('P', array(210, 297));
 // setting size format template
 $pdf->useTemplate($tplId, 0, 0, 210, 297);
 
+if($Gatepass[0]->status == 1){
+  $pdf->Image(base_url('src/assets/img/accept.png'),100, 0, 100, 100);
+}else{
+  $pdf->Image(base_url('src/assets/img/reject.png'),100, 0, 100, 100);
+}
 
 
 // format text

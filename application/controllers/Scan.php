@@ -14,6 +14,8 @@ class Scan extends CI_Controller
 			include APPPATH . 'third_party/qrlib/src/qrlib.php';
 			include APPPATH . 'third_party/fpdf/fpdf.php';
 			include APPPATH . 'third_party/fpdf/src/autoload.php';
+			$language = $this->session->userdata('language');
+			$this->lang->load('general', $language);
 		}
 	}
 	public function index()
