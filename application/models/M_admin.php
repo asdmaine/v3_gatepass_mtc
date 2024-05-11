@@ -727,7 +727,8 @@ class M_admin extends CI_Model
             f4.signature AS requested_signature,
             f5.pst_name AS securityout_name,
             f6.pst_name AS securityin_name,
-            f7.pst_name AS requested_name
+            f7.pst_name AS requested_name,
+            f7.email AS requested_mail
                 ');
         $this->db->from('gatepass_tb a');
         $this->db->join('gatepass_tbtime b', 'a.id_time = b.id_time', 'left');

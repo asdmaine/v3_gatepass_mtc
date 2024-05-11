@@ -6,12 +6,18 @@ use PHPMailer\PHPMailer\SMTP;
 
 $mail = new PHPMailer(true);
 $string = 'isi string';
-
-if ($Gatepass[0]->status_recommended == 1 & $Gatepass[0]->status_approved == 1 & $Gatepass[0]->status_acknowledged == 1) {
-    $status_gatepass = $this->lang->line('DITERIMA DENGAN QRCODE') . $Gatepass[0]->qrcode;
-} else {
-    $status_gatepass = 'REJECTED';
+$mailto = 0;
+if($as == 'requested'){
+    $mailto = $Gatepass[0]->requested_mail;
+}else if ($as == 'recommended'){
+    $mailto = $Gatepass[0]->recommended_mail;
+}else if ($as == 'approved'){
+    $mailto = $Gatepass[0]->approved_mail;
+}else if ($as == 'acknowledged'){
+    $mailto = $Gatepass[0]->acknowledged_mail;
 }
+
+
 if ($Gatepass[0]->status_acknowledged == 1) {
     $status_acknowledged = 'accepted';
 } else if ($Gatepass[0]->status_acknowledged == 0) {
@@ -37,6 +43,18 @@ if($Gatepass[0]->approvedby_pst_pnr != 0){
         $status_approved = 'rejected';
       }
 }
+if ($Gatepass[0]->status_recommended == 1 & $Gatepass[0]->status_approved == 1 & $Gatepass[0]->status_acknowledged == 1) {
+    $status_gatepass = $this->lang->line('DITERIMA DENGAN QRCODE') . $Gatepass[0]->qrcode;
+} else {
+    $status_gatepass = 'REJECTED';
+    if($Gatepass[0]->status_recommended == -1){
+        $status_recommended = 'rejected';
+        $status_approved = 'rejected';
+        $status_acknowledged = 'rejected';
+    }else if($Gatepass[0]->status_approved == -1){
+        $status_acknowledged = 'rejected';
+    }
+}
 try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com'; // Ganti dengan alamat SMTP server Anda
@@ -51,7 +69,7 @@ try {
 
     // Pengaturan email
     $mail->setFrom('shdsulthon11@gmail.com', 'Gatepass System'); // Ganti dengan alamat email dan nama Anda
-    $mail->addAddress('sulthon.sdn@gmail.com', 'To '); // Ganti dengan alamat email penerima
+    $mail->addAddress($mailto, 'To '); // Ganti dengan alamat email penerima
     $mail->Subject = 'NOTIFICATION FROM DSAW GATEPASS SYSTEM';
     $mail->isHTML(true);
 
