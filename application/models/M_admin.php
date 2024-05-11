@@ -127,6 +127,7 @@ class M_admin extends CI_Model
     }
 
 
+
     // public function GetApproved()
     // {
     //     $sql =
@@ -145,20 +146,23 @@ class M_admin extends CI_Model
     //     $query = $this->db->query($sql);
     //     return $query->result();
     // }
-    public function GetApproved()
+    public function GetApproved($pst_pnr)
     {
         $sql =
-            "SELECT DISTINCT
-            a.approval1,
-            b.pst_name
-        FROM
-            tbmleave_setting a
-        LEFT JOIN
-            pst b ON a.approval1 = b.pst_pnr
-        WHERE
-            b.pst_status >= 0
-        ORDER BY
-            b.pst_name ASC";
+            "SELECT 
+        a.approval1,
+        b.pst_name
+    FROM
+        tbmleave_setting a
+    LEFT JOIN
+        pst b ON a.approval1 = b.pst_pnr
+    WHERE
+        b.pst_status >= 0
+        and
+        a.pst_pnr = '$pst_pnr'
+
+    ORDER BY
+        b.pst_name ASC";
 
         $query = $this->db->query($sql);
         return $query->result();
@@ -223,7 +227,21 @@ class M_admin extends CI_Model
             } catch (Exception $e) {
                 echo "Error: " . $e->getMessage();
             }
-            redirect('mail/push/recommended/' . $qrcode . '/dashboard');
+            if ($post['recommended'] == '0') {
+                if ($post['approved'] == '0') {
+                    $data = array('status_approved' => 1);
+                    $this->db->where('id_verifikasi', $id_verifikasi);
+                    $this->db->update('gatepass_tbverifikasi', $data);
+                    redirect('mail/push/acknowledged/' . $qrcode . '/dashboard');
+                } else {
+                    $data = array('status_recommended' => 1);
+                    $this->db->where('id_verifikasi', $id_verifikasi);
+                    $this->db->update('gatepass_tbverifikasi', $data);
+                    redirect('mail/push/approved/' . $qrcode . '/dashboard');
+                }
+            } else {
+                redirect('mail/push/recommended/' . $qrcode . '/dashboard');
+            }
         } else {
             echo 'eror';
         }

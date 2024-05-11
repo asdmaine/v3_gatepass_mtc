@@ -21,7 +21,7 @@ class Submit extends CI_Controller
 		$this->data['Progress'] = $this->m_admin->GetProgress($string);
 		$this->data['Recommended'] = $this->m_admin->GetRecommended($string);
 		// $this->data['Recommended'] = $this->m_admin->GetRecommended();
-		$this->data['Approved'] = $this->m_admin->GetApproved();
+		$this->data['Approved'] = $this->m_admin->GetApproved($string);
 		// $this->data['Approved'] = $this->m_admin->GetApproved();
 		// acknowledged(belum ada fungsinya)
 		// $this->data['Acknowledged'] = $this->m_admin->GetAcknowledged();

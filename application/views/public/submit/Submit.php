@@ -192,10 +192,11 @@
           </button>
         </div>
         <div class="modal-body">
-        <?= $this->lang->line('Anda akan kehilangan progres dari gatepass anda') ?>
+          <?= $this->lang->line('Anda akan kehilangan progres dari gatepass anda') ?>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal"><?= $this->lang->line('Kembali') ?></button>
+          <button type="button" class="btn btn-secondary"
+            data-dismiss="modal"><?= $this->lang->line('Kembali') ?></button>
           <a href="<?= base_url('submit/do_delete/' . $pg->id_gatepass . '/' . $pg->id_pengesahan) ?>"
             class="btn btn-danger"><?= $this->lang->line('Hapus') ?></a>
         </div>
@@ -225,16 +226,19 @@
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="keperluan" id="urusan_perusahaan"
                   value="urusan_perusahaan" required>
-                <label class="form-check-label" for="urusan_perusahaan"><?= $this->lang->line('Urusan Perusahaan') ?>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <label class="form-check-label"
+                  for="urusan_perusahaan"><?= $this->lang->line('Urusan Perusahaan') ?>&nbsp;&nbsp;&nbsp;&nbsp;</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="keperluan" id="urusan_keluarga"
                   value="urusan_keluarga" required>
-                <label class="form-check-label" for="urusan_keluarga"><?= $this->lang->line('Urusan Keluarga') ?>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <label class="form-check-label"
+                  for="urusan_keluarga"><?= $this->lang->line('Urusan Keluarga') ?>&nbsp;&nbsp;&nbsp;&nbsp;</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="keperluan" id="sakit" value="sakit" required>
-                <label class="form-check-label" for="sakit"><?= $this->lang->line('Sakit/Klinik/Rs') ?>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <label class="form-check-label"
+                  for="sakit"><?= $this->lang->line('Sakit/Klinik/Rs') ?>&nbsp;&nbsp;&nbsp;&nbsp;</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="keperluan" id="lain-lain" value="lain-lain" required>
@@ -249,17 +253,20 @@
             <div class="form-group">
               <label class="form-label font-weight-bold"><?= $this->lang->line('Perkiraan waktu') ?></label><br>
               <div class="input-group mb-1">
-                <input type="text" class="form-control text-light" placeholder="<?= $this->lang->line('Perkiraan jam keluar') ?>" disabled>
+                <input type="text" class="form-control text-light"
+                  placeholder="<?= $this->lang->line('Perkiraan jam keluar') ?>" disabled>
                 <input class="form-control" onchange="checkTimeInterval()" type="time" name="est_time_out"
                   id="form_est_time_out" required>
               </div>
               <div class="input-group mb-4">
-                <input type="text" class="form-control text-light" placeholder="<?= $this->lang->line('Perkiraan jam masuk') ?>" disabled>
+                <input type="text" class="form-control text-light"
+                  placeholder="<?= $this->lang->line('Perkiraan jam masuk') ?>" disabled>
                 <input class="form-control" onchange="checkTimeInterval()" type="time" name="est_time_in"
                   id="form_est_time_in" required>
               </div>
               <div class="input-group mb-4">
-                <p class="text-center w-100 text-danger" id="alert-time" style="display:none;"><?= $this->lang->line('Tidak boleh keluar lebih dari 3 jam') ?></p>
+                <p class="text-center w-100 text-danger" id="alert-time" style="display:none;">
+                  <?= $this->lang->line('Tidak boleh keluar lebih dari 3 jam') ?></p>
               </div>
             </div>
             <div class="form-group mb-4">
@@ -279,25 +286,31 @@
               <div class="input-group mb-1">
                 <input type="text" class="form-control text-light" placeholder="Recommended By" disabled>
                 <select name="recommended" id="" class="form-control" required>
-                  <option value="" selected disabled>-</option>
-                  <?php foreach ($Recommended as $var) { ?>
-                    <option value="<?= $var->verifikasi1 ?>" class="text-uppercase">
+                  <?php if (empty($Recommended)) { ?>
+                    <option selected value="0" class="text-uppercase">
+                      -
+                    </option>
+                  <?php } else { foreach ($Recommended as $var) { ?>
+                    <option selected value="<?= $var->verifikasi1 ?>" class="text-uppercase">
                       <?= $var->pst_name ?> -
                       <?= $var->verifikasi1 ?>
                     </option>
-                  <?php } ?>
+                  <?php }} ?>
                 </select>
               </div>
               <div class="input-group mb-1">
                 <input type="text" class="form-control text-light" placeholder="Approved By" disabled>
                 <select name="approved" id="" class="form-control" required>
-                  <option value="" selected disabled>-</option>
-                  <?php foreach ($Approved as $var) { ?>
-                    <option value="<?= $var->approval1 ?>" class="text-uppercase">
+                  <?php if (empty($Approved)) { ?>
+                    <option selected value="0" class="text-uppercase">
+                      -
+                    </option>
+                  <?php } else { foreach ($Approved as $var) { ?>
+                    <option selected value="<?= $var->approval1 ?>" class="text-uppercase">
                       <?= $var->pst_name ?> -
                       <?= $var->approval1 ?>
                     </option>
-                  <?php } ?>
+                  <?php }} ?>
                 </select>
               </div>
               <div class="input-group mb-4">
@@ -364,11 +377,13 @@
             <div class="form-group mb-4">
               <label class="form-label font-weight-bold">Perkiraan Waktu</label><br>
               <div class="input-group mb-1">
-                <input type="text" class="form-control text-light" placeholder="<?= $this->lang->line('Perkiraan jam keluar') ?>" disabled>
+                <input type="text" class="form-control text-light"
+                  placeholder="<?= $this->lang->line('Perkiraan jam keluar') ?>" disabled>
                 <input class="form-control" type="time" id="est_time_out" value="<?= $pg->est_time_out ?>" disabled>
               </div>
               <div class="input-group mb-4">
-                <input type="text" class="form-control text-light" placeholder="<?= $this->lang->line('Perkiraan jam masuk') ?>" disabled>
+                <input type="text" class="form-control text-light"
+                  placeholder="<?= $this->lang->line('Perkiraan jam masuk') ?>" disabled>
                 <input class="form-control" type="time" id="est_time_in" value="<?= $pg->est_time_in ?>" disabled>
               </div>
             </div>
