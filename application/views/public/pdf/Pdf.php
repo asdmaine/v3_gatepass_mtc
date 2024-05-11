@@ -95,31 +95,37 @@ if ($Gatepass[0]->status_recommended == 1) {
   if (isset($Gatepass[0]->recommended_signature)) {
     $pdf->Image($Gatepass[0]->recommended_signature, 148, 182, 25, 0, 'PNG');
   }
-} else {
+}else if($Gatepass[0]->status_recommended == 0) {
+
+}
+ else {
   $pdf->SetXY(148, 182);
   $pdf->Write(0, 'rejected');
-}
-
+ }
 // approved signature
 if ($Gatepass[0]->status_approved == 1) {
   if (isset($Gatepass[0]->approved_signature)) {
     $pdf->Image($Gatepass[0]->approved_signature, 148, 194, 25, 0, 'PNG');
   }
-} else {
+}else if($Gatepass[0]->status_approved == 0) {
+ 
+}
+ else {
   $pdf->SetXY(148, 194);
   $pdf->Write(0, 'rejected');
-}
-
+ }
 if ($Gatepass[0]->status_acknowledged == 1) {
   // acknowledged signature
   if (isset($Gatepass[0]->acknowledged_signature)) {
     $pdf->Image($Gatepass[0]->acknowledged_signature, 148, 205, 25, 0, 'PNG');
   }
-} else {
+}else if($Gatepass[0]->status_acknowledged == 0) {
+ 
+}
+ else {
   $pdf->SetXY(148, 205);
   $pdf->Write(0, 'rejected');
-}
-
+ }
 // security out signature
 if (isset($Gatepass[0]->securityout_signature)) {
   $pdf->Image($Gatepass[0]->securityout_signature, 65, 232, 25, 0, 'PNG');

@@ -19,8 +19,10 @@ class Submit extends CI_Controller
 	{
 		$string = $this->logindata['user']['pst_pnr'];
 		$this->data['Progress'] = $this->m_admin->GetProgress($string);
-		$this->data['Recommended'] = $this->m_admin->GetRecommended();
+		$this->data['Recommended'] = $this->m_admin->GetRecommended($string);
+		// $this->data['Recommended'] = $this->m_admin->GetRecommended();
 		$this->data['Approved'] = $this->m_admin->GetApproved();
+		// $this->data['Approved'] = $this->m_admin->GetApproved();
 		// acknowledged(belum ada fungsinya)
 		// $this->data['Acknowledged'] = $this->m_admin->GetAcknowledged();
 		$this->sidebar->view('public/submit/Submit', array_merge($this->logindata, $this->data));

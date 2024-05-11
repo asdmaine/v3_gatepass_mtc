@@ -86,10 +86,28 @@ class M_admin extends CI_Model
         }
     }
 
-    public function GetRecommended()
+    // public function GetRecommended()
+    // {
+    //     $sql =
+    //         "SELECT DISTINCT
+    //         a.verifikasi1,
+    //         b.pst_name
+    //     FROM
+    //         tbmleave_setting a
+    //     LEFT JOIN
+    //         pst b ON a.verifikasi1 = b.pst_pnr
+    //     WHERE
+    //         b.pst_status >= 0
+    //     ORDER BY
+    //         b.pst_name ASC";
+
+    //     $query = $this->db->query($sql);
+    //     return $query->result();
+    // }
+    public function GetRecommended($pst_pnr)
     {
         $sql =
-            "SELECT DISTINCT
+            "SELECT 
             a.verifikasi1,
             b.pst_name
         FROM
@@ -98,12 +116,35 @@ class M_admin extends CI_Model
             pst b ON a.verifikasi1 = b.pst_pnr
         WHERE
             b.pst_status >= 0
+            and
+            a.pst_pnr = '$pst_pnr'
+
         ORDER BY
             b.pst_name ASC";
 
         $query = $this->db->query($sql);
         return $query->result();
     }
+
+
+    // public function GetApproved()
+    // {
+    //     $sql =
+    //         "SELECT DISTINCT
+    //         a.approval1,
+    //         b.pst_name
+    //     FROM
+    //         tbmleave_setting a
+    //     LEFT JOIN
+    //         pst b ON a.approval1 = b.pst_pnr
+    //     WHERE
+    //         b.pst_status >= 0
+    //     ORDER BY
+    //         b.pst_name ASC";
+
+    //     $query = $this->db->query($sql);
+    //     return $query->result();
+    // }
     public function GetApproved()
     {
         $sql =
