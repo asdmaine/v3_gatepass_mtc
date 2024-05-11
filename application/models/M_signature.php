@@ -8,7 +8,7 @@ class M_signature extends CI_Model
     public function SetSignature()
     {
         try {
-            $pdo = new PDO('mysql:host=localhost;dbname=dbgatepass', 'root', '');
+            $pdo = new PDO('mysql:host=localhost;dbname=sulthonp_dbgatepass', 'sulthonp_root', 'Sulthon.sdn@gmail.com');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $new_signature = $_POST['signature'];
@@ -37,7 +37,7 @@ class M_signature extends CI_Model
     public function SetSignatureFromMail()
     {
         try {
-            $pdo = new PDO('mysql:host=localhost;dbname=dbgatepass', 'root', '');
+            $pdo = new PDO('mysql:host=localhost;dbname=sulthonp_dbgatepass', 'sulthonp_root', 'Sulthon.sdn@gmail.com');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $new_signature = $_POST['signature'];
