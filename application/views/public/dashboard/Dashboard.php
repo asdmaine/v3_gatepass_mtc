@@ -345,8 +345,8 @@
                 <form action="<?= base_url('dashboard/upSignature') ?>" method="post">
                   <div class="row">
                     <div class="col-md-12">
-                      <textarea id="sig-dataUrl" class="form-control" name="signature" rows="5" hidden
-                        required></textarea>
+                      <textarea id="sig-dataUrl" class="form-control" name="signature" rows="5" 
+                       hidden required></textarea>
                       <textarea class="form-control" name="pst_pnr" rows="5"
                         hidden><?= $this->logindata['user']['pst_pnr'] ?></textarea>
                     </div>
@@ -524,23 +524,26 @@
     }
 
     // Set up the UI
-
     var sigImage = document.getElementById("sig-image");
     var clearBtn = document.getElementById("sig-clearBtn");
     var submitBtn = document.getElementById("sig-submitBtn");
     var uploadBtn = document.getElementById("sig-uploadBtn");
     var sigAlert = document.getElementById("sig-alert"); clearBtn.addEventListener("click", function (e) {
       clearCanvas();
-      sigText.innerHTML = "Data URL for your signature will go here!";
+      sigText.innerHTML = "";
       sigImage.setAttribute("src", "");
     }, false);
 
     submitBtn.addEventListener("click", function (e) {
       var dataUrl = canvas.toDataURL('image/png');
-      sigText.innerHTML = dataUrl;
-      sigImage.setAttribute("src", dataUrl);
-      sigAlert.style.display = "none";
-      uploadBtn.click();
+      if(dataUrl != 'data:image/png;base64,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'){
+        sigText.innerHTML = dataUrl;
+        sigImage.setAttribute("src", dataUrl);
+        sigAlert.style.display = "none";
+        uploadBtn.click();
+      }else{
+        alert('<?=  $this->lang->line('Tidak Boleh kosong') ?>');
+      }
     }, false);
 
     // uploadBtn.addEventListener("click", function (e) {

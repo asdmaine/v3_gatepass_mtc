@@ -27,6 +27,7 @@ $lang['Hapus']='Delete';
 $lang['Perkiraan waktu']='Estimated Time';
 $lang['Perkiraan jam keluar']='Estimated time out';
 $lang['Perkiraan jam masuk']='Estimated time in';
+$lang['Tidak Boleh kosong']='Signature canvas cannot empty!';
 
 // ALL_HISTORY
 $lang['Semua Histori Gatepass pada tahun']='All Gatepass History from year ';

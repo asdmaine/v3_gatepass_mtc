@@ -30,6 +30,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/tests/
 /tests/results/
 # Ignore database files
-/application/config/database.php
+# /application/config/database.php
 /application/config/database.php.bak
-/application/models/M_signature.php
+# /application/models/M_signature.php
