@@ -19,22 +19,23 @@ if ($Gatepass[0]->status_acknowledged == 1) {
 } else {
     $status_acknowledged = 'rejected';
 }
-if ($Gatepass[0]->status_approved == 1) {
-    $status_approved = 'accepted';
-} else if ($Gatepass[0]->status_approved == 0) {
-    $status_approved = 'waiting you';
-} else {
-    $status_approved = 'rejected';
-    $status_acknowledged = 'rejected';
+if($Gatepass[0]->recommendedby_pst_pnr != 0){
+    if ($Gatepass[0]->status_recommended == 1) {
+        $status_recommended = 'accepted';
+      } else if ($Gatepass[0]->status_recommended == 0) {
+        $status_recommended = 'waiting you';
+      } else {
+        $status_recommended = 'rejected';
+      }
 }
-if ($Gatepass[0]->status_recommended == 1) {
-    $status_recommended = 'accepted';
-} else if ($Gatepass[0]->status_recommended == 0) {
-    $status_recommended = 'waiting you';
-} else {
-    $status_recommended = 'rejected';
-    $status_approved = 'rejected';
-    $status_acknowledged = 'rejected';
+if($Gatepass[0]->approvedby_pst_pnr != 0){
+    if ($Gatepass[0]->status_approved == 1) {
+        $status_approved = 'accepted';
+      } else if ($Gatepass[0]->status_approved == 0) {
+        $status_approved = 'waiting you';
+      } else {
+        $status_approved = 'rejected';
+      }
 }
 try {
     $mail->isSMTP();
