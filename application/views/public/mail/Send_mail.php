@@ -20,7 +20,7 @@ if($Gatepass[0]->recommendedby_pst_pnr != 0){
     if ($Gatepass[0]->status_recommended == 1) {
         $status_recommended = 'accepted';
       } else if ($Gatepass[0]->status_recommended == 0) {
-        $status_recommended = 'waiting you';
+        $status_recommended = 'waiting';
       } else {
         $status_recommended = 'rejected';
       }
@@ -29,7 +29,7 @@ if($Gatepass[0]->approvedby_pst_pnr != 0){
     if ($Gatepass[0]->status_approved == 1) {
         $status_approved = 'accepted';
       } else if ($Gatepass[0]->status_approved == 0) {
-        $status_approved = 'waiting you';
+        $status_approved = 'waiting';
       } else {
         $status_approved = 'rejected';
       }
@@ -37,11 +37,11 @@ if($Gatepass[0]->approvedby_pst_pnr != 0){
 if ($Gatepass[0]->status_acknowledged == 1) {
   $status_acknowledged = 'accepted';
 } else if ($Gatepass[0]->status_acknowledged == 0) {
-  $status_acknowledged = 'waiting you';
+  $status_acknowledged = 'waiting';
 } else {
   $status_acknowledged = 'rejected';
 }
-if ($Gatepass[0]->status_recommended == 1 & $Gatepass[0]->status_approved == 1 & $Gatepass[0]->status_acknowledged == 1) {
+if ($Gatepass[0]->status == 1) {
   $status_gatepass =  $this->lang->line('DITERIMA DENGAN QRCODE') . $Gatepass[0]->qrcode;
 } else {
   $status_gatepass = 'REJECTED';
@@ -86,7 +86,7 @@ try {
       <div>
           <h2>GATEPASS REQUEST</h2>
           <h2>Pesan ini dikirim ke email milik ' . $as .'</h2>
-          <table border="1">
+          <table border="1" width="75%">
               <thead>
                   <tr>
                       <th></th>
@@ -164,7 +164,7 @@ try {
       <div>
       <h2>Pesan ini dikirim ke email milik ' . $as .'</h2>
       <table border="1">
-          <table border="1">
+          <table border="1" width="75%">
               <thead>
                   <tr>
                       <th></th>

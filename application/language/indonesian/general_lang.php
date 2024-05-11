@@ -39,6 +39,8 @@ $lang['Sakit/Klinik/Rs']='Sakit/Klinik/Rs';
 $lang['lain-lain']='lain-lain';
 $lang['Pengesahan']='Pengesahan';
 $lang['Konfirmasi']='Konfirmasi';
+$lang['Apakah anda yakin ingin menolak permintaan gatepass ini?']='Anda sudah menerima permintaan gatepass ini sebelumnya, apakah anda yakin ingin menolak permintaan gatepass ini?';
+
 
 // Send_mail
 $lang['DITERIMA DENGAN QRCODE']='DITERIMA DENGAN QRCODE ';
@@ -47,5 +49,3 @@ $lang['DITERIMA DENGAN QRCODE']='DITERIMA DENGAN QRCODE ';
 $lang['Tidak boleh keluar lebih dari 3 jam']='Tidak boleh keluar lebih dari 3 jam ';
 $lang['dasbor']='Dasbor';
 $lang['keluar']='Keluar'; 
-
-

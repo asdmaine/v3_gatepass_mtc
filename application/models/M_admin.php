@@ -397,6 +397,36 @@ class M_admin extends CI_Model
         }
 
     }
+    public function RejectGatepass()
+    {
+        $post = $this->input->post();
+        try {
+
+            $data2 = array(
+                'status' => '-1',
+            );
+            $this->db->where('id_gatepass', $post['id_gatepass']);
+            $this->db->update('gatepass_tb', $data2);
+
+            $data = array(
+                'status_' . $post['as'] => '-1',
+                'verif_date_' . $post['as'] . 'by' => date('Y-m-d H:i:s')
+            );
+            $this->db->where('id_verifikasi', $post['id_verifikasi']);
+            $this->db->update('gatepass_tbverifikasi', $data);
+
+            $data1 = array(
+                'remarks_' . $post['as'] . 'by' => $post['remarks']
+            );
+            $this->db->where('id_remarks', $post['id_remarks']);
+            $this->db->update('gatepass_tbremarks', $data1);
+
+            redirect('mail/push/requested/' . $post['qrcode'] . '/approve');
+
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
     public function ApproveMail()
     {
         $post = $this->input->post();
@@ -490,126 +520,6 @@ class M_admin extends CI_Model
             }
         }
     }
-    public function RejectGatepass()
-    {
-        $post = $this->input->post();
-        try {
-
-            $data2 = array(
-                'status' => '-1',
-            );
-            $this->db->where('id_gatepass', $post['id_gatepass']);
-            $this->db->update('gatepass_tb', $data2);
-
-            $data = array(
-                'status_' . $post['as'] => '-1',
-                'verif_date_' . $post['as'] . 'by' => date('Y-m-d H:i:s')
-            );
-            $this->db->where('id_verifikasi', $post['id_verifikasi']);
-            $this->db->update('gatepass_tbverifikasi', $data);
-
-            $data1 = array(
-                'remarks_' . $post['as'] . 'by' => $post['remarks']
-            );
-            $this->db->where('id_remarks', $post['id_remarks']);
-            $this->db->update('gatepass_tbremarks', $data1);
-            redirect('approve');
-        } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
-    // public function AcceptGatepassFromMail($what, $as, $qrcode, $id_verifikasi, $id_gatepass)
-    // {
-
-    //     try {
-    //         if ($as == 'acknowledged') {
-    //             $data2 = array(
-    //                 'status' => '1'
-    //             );
-    //             $this->db->where('id_gatepass', $id_gatepass);
-    //             $this->db->update('gatepass_tb', $data2);
-    //             $data = array(
-    //                 'status_' . $as => $what,
-    //                 'verif_date_' . $as . 'by' => date('Y-m-d H:i:s')
-    //             );
-    //             $this->db->where('id_verifikasi', $id_verifikasi);
-    //             $this->db->update('gatepass_tbverifikasi', $data);
-
-    //             // $data1 = array(
-    //             //     'remarks_' . $as . 'by' => $post['remarks']
-    //             // );
-    //             // $this->db->where('id_remarks', $post['id_remarks']);
-    //             // $this->db->update('gatepass_tbremarks', $data1);
-
-    //             if ($as == 'recommended') {
-    //                 redirect('mail/pushbyemail/approved/' . $qrcode . '/' . $what);
-    //             } else if ($as == 'approved') {
-    //                 redirect('mail/pushbyemail/acknowledged/' . $qrcode . '/' . $what);
-    //             } else if ($as == 'acknowledged') {
-    //                 redirect('mail/pushbyemail/requested/' . $qrcode . '/' . $what);
-    //             }
-    //         } else {
-    //             $data = array(
-    //                 'status_' . $as => $what,
-    //                 'verif_date_' . $as . 'by' => date('Y-m-d H:i:s')
-    //             );
-    //             $this->db->where('id_verifikasi', $id_verifikasi);
-    //             $this->db->update('gatepass_tbverifikasi', $data);
-
-    //             // $data1 = array(
-    //             //     'remarks_' . $as . 'by' => $post['remarks']
-    //             // );
-    //             // $this->db->where('id_remarks', $post['id_remarks']);
-    //             // $this->db->update('gatepass_tbremarks', $data1);
-
-    //             if ($as == 'recommended') {
-    //                 redirect('mail/pushbyemail/approved/' . $qrcode . '/' . $what);
-    //             } else if ($as == 'approved') {
-    //                 redirect('mail/pushbyemail/acknowledged/' . $qrcode . '/' . $what);
-    //             } else if ($as == 'acknowledged') {
-    //                 redirect('mail/pushbyemail/requested/' . $qrcode . '/' . $what);
-    //             }
-    //         }
-
-
-    //     } catch (Exception $e) {
-    //         echo "Error: " . $e->getMessage();
-    //     }
-
-    // }
-
-    // public function RejectGatepassFromMail($what, $as, $qrcode, $id_verifikasi, $id_gatepass)
-    // {
-    //     $post = $this->input->post();
-    //     try {
-    //         $data2 = array(
-    //             'status' => '-1'
-    //         );
-    //         $this->db->where('id_gatepass', $id_gatepass);
-    //         $this->db->update('gatepass_tb', $data2);
-
-    //         $data = array(
-    //             'status_' . $as => $what,
-    //             'verif_date_' . $as . 'by' => date('Y-m-d H:i:s')
-    //         );
-    //         $this->db->where('id_verifikasi', $id_verifikasi);
-    //         $this->db->update('gatepass_tbverifikasi', $data);
-
-    //         // $data1 = array(
-    //         //     'remarks_' . $as . 'by' => $post['remarks']
-    //         // );
-    //         // $this->db->where('id_remarks', $post['id_remarks']);
-    //         // $this->db->update('gatepass_tbremarks', $data1);
-
-
-    //         redirect('mail/pushbyemail/requested/' . $qrcode . '/' . $what);
-
-
-    //     } catch (Exception $e) {
-    //         echo "Error: " . $e->getMessage();
-    //     }
-
-    // }
 
     public function GetHistory($pst_pnr)
     {

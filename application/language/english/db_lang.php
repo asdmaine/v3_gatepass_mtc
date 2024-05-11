@@ -39,6 +39,7 @@ $lang['Sakit/Klinik/Rs']='Sick/Clinic/Hs';
 $lang['lain-lain']='others';
 $lang['Pengesahan']='Authorization';
 $lang['Konfirmasi']='Confirm';
+$lang['Apakah anda yakin ingin menolak permintaan gatepass ini?']='You have accepted this gatepass request before, Are you sure want to reject htis gatepass request?';
 
 // Send_mail
 $lang['DITERIMA DENGAN QRCODE']='ACCEPTED WITH QRCODE ';

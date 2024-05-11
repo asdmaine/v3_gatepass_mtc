@@ -42,13 +42,23 @@
                     <th class="text-center align-middle text-uppercase" colspan="7">no data to be shown</th>
                   </tr> -->
                 <?php } else {
-                  if ($pg->recommendedby_pst_pnr == $this->logindata['user']['pst_pnr']) {
+                  $as = 0;
+                  if ($pg->recommendedby_pst_pnr == $this->logindata['user']['pst_pnr'] && $pg->status_recommended == '0') {
                     $as = 'recommended';
-                  } elseif ($pg->approvedby_pst_pnr == $this->logindata['user']['pst_pnr']) {
+                  } else if ($pg->approvedby_pst_pnr == $this->logindata['user']['pst_pnr'] && $pg->status_approved == '0') {
                     $as = 'approved';
-                  } elseif ($pg->acknowledgedby_pst_pnr == $this->logindata['user']['pst_pnr']) {
+                  } else if ($pg->acknowledgedby_pst_pnr == $this->logindata['user']['pst_pnr'] && $pg->status_acknowledged == '0') {
                     $as = 'acknowledged';
                   }
+                  $asBefore = 0;
+                  if ($pg->acknowledgedby_pst_pnr == $this->logindata['user']['pst_pnr']) {
+                    $asBefore = 'acknowledged';
+                  } else if ($pg->approvedby_pst_pnr == $this->logindata['user']['pst_pnr']) {
+                    $asBefore = 'approved';
+                  } else if ($pg->recommendedby_pst_pnr == $this->logindata['user']['pst_pnr']) {
+                    $asBefore = 'recommended';
+                  }
+
 
                   $recommended_name = $pg->recommended_name;
                   $approved_name = $pg->approved_name;
@@ -157,9 +167,10 @@
                     <td class="text-center spacing-2">
                       <div class="btn btn-info m-1" data-toggle="modal" data-target=".ModalDetail<?= $i ?>"><i
                           class="fa-solid fa-circle-info"></i></div>
-                      <div class="btn btn-primary m-1 btn-edit" data-id_verifikasi="<?= $pg->id_verifikasi ?>" data-id_gatepass="<?= $pg->id_gatepass ?>"
-                        data-id_remarks="<?= $pg->id_remarks ?>" data-qrcode="<?= $pg->qrcode ?>"><i
-                          class="fa-solid fa-pen"></i></div>
+                      <div class="btn btn-primary m-1 btn-edit" data-id_verifikasi="<?= $pg->id_verifikasi ?>"
+                        data-id_gatepass="<?= $pg->id_gatepass ?>" data-id_remarks="<?= $pg->id_remarks ?>"
+                        data-qrcode="<?= $pg->qrcode ?>" data-as="<?= $as ?>"><i class="fa-solid fa-pen"></i>
+                      </div>
                     </td>
                   </tr>
                   <!-- modal detail -->
@@ -176,7 +187,8 @@
                         <div class="modal-body">
                           <form>
                             <div class="form-group mb-4">
-                              <label for="tanggal" class="col-form-label font-weight-bold"><?= $this->lang->line('Tanggal') ?></label>
+                              <label for="tanggal"
+                                class="col-form-label font-weight-bold"><?= $this->lang->line('Tanggal') ?></label>
                               <input type="date" class="form-control w-50" id="tanggal" value="<?= $pg->tanggal_gatepass ?>"
                                 disabled>
                             </div>
@@ -185,16 +197,19 @@
                               <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" id="<?= $pg->keperluan ?>"
                                   value="<?= $pg->keperluan ?>" disabled checked>
-                                <label class="form-check-label" for="<?= $pg->keperluan ?>"><?= $pg->keperluan ?>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <label class="form-check-label"
+                                  for="<?= $pg->keperluan ?>"><?= $pg->keperluan ?>&nbsp;&nbsp;&nbsp;&nbsp;</label>
                               </div>
                             </div>
                             <div class="form-group mb-4">
-                              <label for="penjelasan" class="form-label font-weight-bold"><?= $this->lang->line('Penjelasan') ?></label>
+                              <label for="penjelasan"
+                                class="form-label font-weight-bold"><?= $this->lang->line('Penjelasan') ?></label>
                               <textarea class="form-control" id="penjelasan" style="height: 100px"
                                 disabled><?= $pg->penjelasan_keperluan ?></textarea>
                             </div>
                             <div class="form-group mb-4">
-                              <label class="form-label font-weight-bold"><?= $this->lang->line('Perkiraan waktu') ?></label><br>
+                              <label
+                                class="form-label font-weight-bold"><?= $this->lang->line('Perkiraan waktu') ?></label><br>
                               <div class="input-group mb-1">
                                 <input type="text" class="form-control text-light" placeholder="Perkiraan Jam Keluar"
                                   disabled>
@@ -282,7 +297,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title text-center w-100" id="ModalEditLabel">Aksi</h5>
+          <h5 class="modal-title text-center w-100" id="ModalEditLabel"><?= $this->lang->line('Aksi') ?></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -291,12 +306,12 @@
           <form action="<?= base_url('approve/do_approve') ?>" method="post">
             <div class="form-group">
               <select class="form-control" name="what" id="" required>
-                <option value="1">Accept</option>
-                <option value="-1">Reject</option>
+                <option value="1" id="edit_accept">Accept</option>
+                <option value="-1" id="edit_reject">Reject</option>
               </select>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="as" value="<?= $as ?>" hidden>
+              <input type="text" class="form-control" id="edit_as" name="as" value="" hidden>
               <input type="text" class="form-control" id="edit_id_verifikasi" name="id_verifikasi" hidden>
               <input type="text" class="form-control" id="edit_id_gatepass" name="id_gatepass" hidden>
               <input type="text" class="form-control" id="edit_id_remarks" name="id_remarks" hidden>
@@ -304,15 +319,22 @@
               <label for="remarks">Remarks</label>
               <input type="text" class="form-control" name="remarks" id="remarks" value="-">
             </div>
+            <div style="display:none;" id="alert_reject" class="alert alert-danger w-100" role="alert">
+              <?= $this->lang->line('Apakah anda yakin ingin menolak permintaan gatepass ini?') ?>
+            </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal"><?= $this->lang->line('Kembali') ?></button>
+
+          <button type="button" class="btn btn-secondary"
+            data-dismiss="modal"><?= $this->lang->line('Kembali') ?></button>
           <button class="btn btn-primary"><?= $this->lang->line('Konfirmasi') ?></button>
           </form>
         </div>
       </div>
     </div>
   </div>
+
+
   <!-- punya header -->
   </div>
   </div>
@@ -328,11 +350,25 @@
         var idgatepass = this.getAttribute("data-id_gatepass");
         var idremarks = this.getAttribute("data-id_remarks");
         var qrcode = this.getAttribute("data-qrcode");
+        var as = this.getAttribute("data-as");
+        var acceptOption = document.getElementById('edit_accept');
+        var rejectOption = document.getElementById('edit_reject');
+        var rejectAlert = document.getElementById('alert_reject');
         document.getElementById('edit_id_verifikasi').value = idverifikasi;
         document.getElementById('edit_id_gatepass').value = idgatepass;
         document.getElementById('edit_id_remarks').value = idremarks;
         document.getElementById('edit_qrcode').value = qrcode;
-        $('#ModalEdit').modal('show');
+        document.getElementById('edit_as').value = as;
+        if (as == 0) {
+          acceptOption.setAttribute('disabled', 'disabled');
+          rejectOption.setAttribute('selected', 'selected');
+          document.getElementById('edit_as').value = '<?= $asBefore ?>';
+          rejectAlert.style.display = 'block';
+          $('#ModalEdit').modal('show');
+        } else {
+          rejectAlert.style.display = 'none';
+          $('#ModalEdit').modal('show');
+        }
       });
     });
 
