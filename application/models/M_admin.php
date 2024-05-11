@@ -397,6 +397,99 @@ class M_admin extends CI_Model
         }
 
     }
+    public function ApproveMail()
+    {
+        $post = $this->input->post();
+        $id_gatepass = $post['id_gatepass'];
+        $as = $post['as'];
+        $what = $post['what'];
+        $id_verifikasi = $post['id_verifikasi'];
+        $qrcode = $post['qrcode'];
+        if ($what == '-1') {
+            try {
+                $data2 = array(
+                    'status' => '-1'
+                );
+                $this->db->where('id_gatepass', $id_gatepass);
+                $this->db->update('gatepass_tb', $data2);
+
+                $data = array(
+                    'status_' . $as => $what,
+                    'verif_date_' . $as . 'by' => date('Y-m-d H:i:s')
+                );
+                $this->db->where('id_verifikasi', $id_verifikasi);
+                $this->db->update('gatepass_tbverifikasi', $data);
+
+                $data1 = array(
+                    'remarks_' . $as . 'by' => $post['remarks']
+                );
+                $this->db->where('id_remarks', $post['id_remarks']);
+                $this->db->update('gatepass_tbremarks', $data1);
+
+
+                redirect('mail/pushbyemail/requested/' . $qrcode . '/' . $what);
+
+
+            } catch (Exception $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        } else if ($post['what'] == '1') {
+            try {
+                if ($as == 'acknowledged') {
+                    $data2 = array(
+                        'status' => '1'
+                    );
+                    $this->db->where('id_gatepass', $id_gatepass);
+                    $this->db->update('gatepass_tb', $data2);
+                    $data = array(
+                        'status_' . $as => $what,
+                        'verif_date_' . $as . 'by' => date('Y-m-d H:i:s')
+                    );
+                    $this->db->where('id_verifikasi', $id_verifikasi);
+                    $this->db->update('gatepass_tbverifikasi', $data);
+
+                    // $data1 = array(
+                    //     'remarks_' . $as . 'by' => $post['remarks']
+                    // );
+                    // $this->db->where('id_remarks', $post['id_remarks']);
+                    // $this->db->update('gatepass_tbremarks', $data1);
+
+                    if ($as == 'recommended') {
+                        redirect('mail/pushbyemail/approved/' . $qrcode . '/' . $what);
+                    } else if ($as == 'approved') {
+                        redirect('mail/pushbyemail/acknowledged/' . $qrcode . '/' . $what);
+                    } else if ($as == 'acknowledged') {
+                        redirect('mail/pushbyemail/requested/' . $qrcode . '/' . $what);
+                    }
+                } else {
+                    $data = array(
+                        'status_' . $as => $what,
+                        'verif_date_' . $as . 'by' => date('Y-m-d H:i:s')
+                    );
+                    $this->db->where('id_verifikasi', $id_verifikasi);
+                    $this->db->update('gatepass_tbverifikasi', $data);
+
+                    $data1 = array(
+                        'remarks_' . $as . 'by' => $post['remarks']
+                    );
+                    $this->db->where('id_remarks', $post['id_remarks']);
+                    $this->db->update('gatepass_tbremarks', $data1);
+
+                    if ($as == 'recommended') {
+                        redirect('mail/pushbyemail/approved/' . $qrcode . '/' . $what);
+                    } else if ($as == 'approved') {
+                        redirect('mail/pushbyemail/acknowledged/' . $qrcode . '/' . $what);
+                    } else if ($as == 'acknowledged') {
+                        redirect('mail/pushbyemail/requested/' . $qrcode . '/' . $what);
+                    }
+                }
+
+
+            } catch (Exception $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        }
+    }
     public function RejectGatepass()
     {
         $post = $this->input->post();
@@ -425,98 +518,98 @@ class M_admin extends CI_Model
             echo "Error: " . $e->getMessage();
         }
     }
-    public function AcceptGatepassFromMail($what, $as, $qrcode, $id_verifikasi, $id_gatepass)
-    {
+    // public function AcceptGatepassFromMail($what, $as, $qrcode, $id_verifikasi, $id_gatepass)
+    // {
 
-        try {
-            if ($as == 'acknowledged') {
-                $data2 = array(
-                    'status' => '1'
-                );
-                $this->db->where('id_gatepass', $id_gatepass);
-                $this->db->update('gatepass_tb', $data2);
-                $data = array(
-                    'status_' . $as => $what,
-                    'verif_date_' . $as . 'by' => date('Y-m-d H:i:s')
-                );
-                $this->db->where('id_verifikasi', $id_verifikasi);
-                $this->db->update('gatepass_tbverifikasi', $data);
+    //     try {
+    //         if ($as == 'acknowledged') {
+    //             $data2 = array(
+    //                 'status' => '1'
+    //             );
+    //             $this->db->where('id_gatepass', $id_gatepass);
+    //             $this->db->update('gatepass_tb', $data2);
+    //             $data = array(
+    //                 'status_' . $as => $what,
+    //                 'verif_date_' . $as . 'by' => date('Y-m-d H:i:s')
+    //             );
+    //             $this->db->where('id_verifikasi', $id_verifikasi);
+    //             $this->db->update('gatepass_tbverifikasi', $data);
 
-                // $data1 = array(
-                //     'remarks_' . $as . 'by' => $post['remarks']
-                // );
-                // $this->db->where('id_remarks', $post['id_remarks']);
-                // $this->db->update('gatepass_tbremarks', $data1);
+    //             // $data1 = array(
+    //             //     'remarks_' . $as . 'by' => $post['remarks']
+    //             // );
+    //             // $this->db->where('id_remarks', $post['id_remarks']);
+    //             // $this->db->update('gatepass_tbremarks', $data1);
 
-                if ($as == 'recommended') {
-                    redirect('mail/pushbyemail/approved/' . $qrcode . '/' . $what);
-                } else if ($as == 'approved') {
-                    redirect('mail/pushbyemail/acknowledged/' . $qrcode . '/' . $what);
-                } else if ($as == 'acknowledged') {
-                    redirect('mail/pushbyemail/requested/' . $qrcode . '/' . $what);
-                }
-            } else {
-                $data = array(
-                    'status_' . $as => $what,
-                    'verif_date_' . $as . 'by' => date('Y-m-d H:i:s')
-                );
-                $this->db->where('id_verifikasi', $id_verifikasi);
-                $this->db->update('gatepass_tbverifikasi', $data);
+    //             if ($as == 'recommended') {
+    //                 redirect('mail/pushbyemail/approved/' . $qrcode . '/' . $what);
+    //             } else if ($as == 'approved') {
+    //                 redirect('mail/pushbyemail/acknowledged/' . $qrcode . '/' . $what);
+    //             } else if ($as == 'acknowledged') {
+    //                 redirect('mail/pushbyemail/requested/' . $qrcode . '/' . $what);
+    //             }
+    //         } else {
+    //             $data = array(
+    //                 'status_' . $as => $what,
+    //                 'verif_date_' . $as . 'by' => date('Y-m-d H:i:s')
+    //             );
+    //             $this->db->where('id_verifikasi', $id_verifikasi);
+    //             $this->db->update('gatepass_tbverifikasi', $data);
 
-                // $data1 = array(
-                //     'remarks_' . $as . 'by' => $post['remarks']
-                // );
-                // $this->db->where('id_remarks', $post['id_remarks']);
-                // $this->db->update('gatepass_tbremarks', $data1);
+    //             // $data1 = array(
+    //             //     'remarks_' . $as . 'by' => $post['remarks']
+    //             // );
+    //             // $this->db->where('id_remarks', $post['id_remarks']);
+    //             // $this->db->update('gatepass_tbremarks', $data1);
 
-                if ($as == 'recommended') {
-                    redirect('mail/pushbyemail/approved/' . $qrcode . '/' . $what);
-                } else if ($as == 'approved') {
-                    redirect('mail/pushbyemail/acknowledged/' . $qrcode . '/' . $what);
-                } else if ($as == 'acknowledged') {
-                    redirect('mail/pushbyemail/requested/' . $qrcode . '/' . $what);
-                }
-            }
-
-
-        } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
-        }
-
-    }
-
-    public function RejectGatepassFromMail($what, $as, $qrcode, $id_verifikasi, $id_gatepass)
-    {
-        $post = $this->input->post();
-        try {
-            $data2 = array(
-                'status' => '-1'
-            );
-            $this->db->where('id_gatepass', $id_gatepass);
-            $this->db->update('gatepass_tb', $data2);
-
-            $data = array(
-                'status_' . $as => $what,
-                'verif_date_' . $as . 'by' => date('Y-m-d H:i:s')
-            );
-            $this->db->where('id_verifikasi', $id_verifikasi);
-            $this->db->update('gatepass_tbverifikasi', $data);
-
-            // $data1 = array(
-            //     'remarks_' . $as . 'by' => $post['remarks']
-            // );
-            // $this->db->where('id_remarks', $post['id_remarks']);
-            // $this->db->update('gatepass_tbremarks', $data1);
+    //             if ($as == 'recommended') {
+    //                 redirect('mail/pushbyemail/approved/' . $qrcode . '/' . $what);
+    //             } else if ($as == 'approved') {
+    //                 redirect('mail/pushbyemail/acknowledged/' . $qrcode . '/' . $what);
+    //             } else if ($as == 'acknowledged') {
+    //                 redirect('mail/pushbyemail/requested/' . $qrcode . '/' . $what);
+    //             }
+    //         }
 
 
-            redirect('mail/pushbyemail/requested/' . $qrcode . '/' . $what);
+    //     } catch (Exception $e) {
+    //         echo "Error: " . $e->getMessage();
+    //     }
+
+    // }
+
+    // public function RejectGatepassFromMail($what, $as, $qrcode, $id_verifikasi, $id_gatepass)
+    // {
+    //     $post = $this->input->post();
+    //     try {
+    //         $data2 = array(
+    //             'status' => '-1'
+    //         );
+    //         $this->db->where('id_gatepass', $id_gatepass);
+    //         $this->db->update('gatepass_tb', $data2);
+
+    //         $data = array(
+    //             'status_' . $as => $what,
+    //             'verif_date_' . $as . 'by' => date('Y-m-d H:i:s')
+    //         );
+    //         $this->db->where('id_verifikasi', $id_verifikasi);
+    //         $this->db->update('gatepass_tbverifikasi', $data);
+
+    //         // $data1 = array(
+    //         //     'remarks_' . $as . 'by' => $post['remarks']
+    //         // );
+    //         // $this->db->where('id_remarks', $post['id_remarks']);
+    //         // $this->db->update('gatepass_tbremarks', $data1);
 
 
-        } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
-        }
+    //         redirect('mail/pushbyemail/requested/' . $qrcode . '/' . $what);
 
-    }
+
+    //     } catch (Exception $e) {
+    //         echo "Error: " . $e->getMessage();
+    //     }
+
+    // }
 
     public function GetHistory($pst_pnr)
     {

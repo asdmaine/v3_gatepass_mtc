@@ -54,6 +54,7 @@ try {
   $mail->Subject = 'NOTIFICATION FROM DSAW GATEPASS SYSTEM';
   $mail->isHTML(true);
 
+  
   if ($as != 'requested') {
     $mail->Body = '
       <!DOCTYPE html>
@@ -122,10 +123,11 @@ try {
           </table>
       </div>
       <br>
+      
       <a style="display: inline-block; background-color: green; color: #fff; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.25rem;"
-          href="' .base_url("mail/approve_from_mail/1/".$as."/".$Gatepass[0]->qrcode."/".$Gatepass[0]->id_verifikasi)."/".$Gatepass[0]->id_gatepass. '">Terima</a>
-      <a style="display: inline-block; background-color: red; color: #fff; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.25rem;"
-          href="' .base_url("mail/approve_from_mail/-1/".$as."/".$Gatepass[0]->qrcode."/".$Gatepass[0]->id_verifikasi)."/".$Gatepass[0]->id_gatepass. '">Tolak</a>
+      href="' .base_url("mail/approve_from_mail/".base64_encode(1)."/".base64_encode($as)."/".base64_encode($Gatepass[0]->qrcode)."/".base64_encode($Gatepass[0]->id_verifikasi)."/".base64_encode($Gatepass[0]->id_gatepass)."/".base64_encode($Gatepass[0]->id_remarks)). '">Terima</a>
+  <a style="display: inline-block; background-color: red; color: #fff; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.25rem;"
+      href="' .base_url("mail/approve_from_mail/".base64_encode(-1)."/".base64_encode($as)."/".base64_encode($Gatepass[0]->qrcode)."/".base64_encode($Gatepass[0]->id_verifikasi)."/".base64_encode($Gatepass[0]->id_gatepass)."/".base64_encode($Gatepass[0]->id_remarks)). '">Tolak</a>
   
   </body>
   
