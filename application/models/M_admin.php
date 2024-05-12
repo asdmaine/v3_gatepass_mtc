@@ -1073,6 +1073,130 @@ class M_admin extends CI_Model
         }
     }
 
+    public function getChart($status)
+    {
+
+        if ($status == 'accept') {
+            $query = $this->db->query(
+                "
+                SELECT
+                    MONTH(tanggal_gatepass) AS bulan,
+                    COUNT(*) AS jumlah
+                FROM
+                    gatepass_tb
+                WHERE
+                    YEAR(tanggal_gatepass) = YEAR(CURDATE()) 
+                    AND MONTH(tanggal_gatepass) BETWEEN 1 AND 12 
+                    AND status = '1'
+                GROUP BY
+                    MONTH(tanggal_gatepass)
+                ORDER BY
+                    bulan;
+                "
+            );
+            return $query->result();
+        }else if($status == 'reject'){
+            $query = $this->db->query(
+                "
+                SELECT
+                    MONTH(tanggal_gatepass) AS bulan,
+                    COUNT(*) AS jumlah
+                FROM
+                    gatepass_tb
+                WHERE
+                    YEAR(tanggal_gatepass) = YEAR(CURDATE()) 
+                    AND MONTH(tanggal_gatepass) BETWEEN 1 AND 12 
+                    AND status = '-1'
+                GROUP BY
+                    MONTH(tanggal_gatepass)
+                ORDER BY
+                    bulan;
+                "
+            );
+            return $query->result();
+        }else if ($status == 'request'){
+            $query = $this->db->query(
+                "
+                SELECT
+                    MONTH(tanggal_gatepass) AS bulan,
+                    COUNT(*) AS jumlah
+                FROM
+                    gatepass_tb
+                WHERE
+                    YEAR(tanggal_gatepass) = YEAR(CURDATE()) 
+                    AND MONTH(tanggal_gatepass) BETWEEN 1 AND 12 
+                GROUP BY
+                    MONTH(tanggal_gatepass)
+                ORDER BY
+                    bulan;
+                "
+            );
+            return $query->result();
+        }
+
+    }
+    public function getChartLast($status)
+    {
+
+        if ($status == 'accept') {
+            $query = $this->db->query(
+                "
+                SELECT
+                    MONTH(tanggal_gatepass) AS bulan,
+                    COUNT(*) AS jumlah
+                FROM
+                    gatepass_tb
+                WHERE
+                    YEAR(tanggal_gatepass) = YEAR(CURDATE())-1 
+                    AND MONTH(tanggal_gatepass) BETWEEN 1 AND 12 
+                    AND status = '1'
+                GROUP BY
+                    MONTH(tanggal_gatepass)
+                ORDER BY
+                    bulan;
+                "
+            );
+            return $query->result();
+        }else if($status == 'reject'){
+            $query = $this->db->query(
+                "
+                SELECT
+                    MONTH(tanggal_gatepass) AS bulan,
+                    COUNT(*) AS jumlah
+                FROM
+                    gatepass_tb
+                WHERE
+                    YEAR(tanggal_gatepass) = YEAR(CURDATE())-1 
+                    AND MONTH(tanggal_gatepass) BETWEEN 1 AND 12 
+                    AND status = '-1'
+                GROUP BY
+                    MONTH(tanggal_gatepass)
+                ORDER BY
+                    bulan;
+                "
+            );
+            return $query->result();
+        }else if ($status == 'request'){
+            $query = $this->db->query(
+                "
+                SELECT
+                    MONTH(tanggal_gatepass) AS bulan,
+                    COUNT(*) AS jumlah
+                FROM
+                    gatepass_tb
+                WHERE
+                    YEAR(tanggal_gatepass) = YEAR(CURDATE())-1 
+                    AND MONTH(tanggal_gatepass) BETWEEN 1 AND 12 
+                GROUP BY
+                    MONTH(tanggal_gatepass)
+                ORDER BY
+                    bulan;
+                "
+            );
+            return $query->result();
+        }
+
+    }
 }
 
 ?>

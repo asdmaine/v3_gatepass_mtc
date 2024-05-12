@@ -26,6 +26,12 @@ class Dashboard extends CI_Controller
 		$this->data['this_month'] = $this->m_admin->ThisMonth($string);
 		$this->data['this_year'] = $this->m_admin->ThisYear($string);
 		$this->data['last_month'] = $this->m_admin->LastMonth($string);
+		$this->data['diterima'] = $this->m_admin->getChart('accept');
+		$this->data['ditolak'] = $this->m_admin->getChart('reject');
+		$this->data['diajukan'] = $this->m_admin->getChart('request');
+		$this->data['diterimaLast'] = $this->m_admin->getChartLast('accept');
+		$this->data['ditolakLast'] = $this->m_admin->getChartLast('reject');
+		$this->data['diajukanLast'] = $this->m_admin->getChartLast('request');
 		if (isset($this->logindata['hr'])) {
 			$this->data['all_this_month'] = $this->m_admin->AllThisMonth();
 			$this->data['all_this_year'] = $this->m_admin->AllThisYear();

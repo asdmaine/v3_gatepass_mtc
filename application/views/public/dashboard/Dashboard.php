@@ -41,6 +41,58 @@
 
   ?>
 
+  <?php
+  $bulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+  $gatepassAcceptData = array_fill(0, 12, 0);
+  foreach ($diterima as $key) {
+    $bulanIndex = $key->bulan - 1;
+    $jumlah = $key->jumlah;
+    $gatepassAcceptData[$bulanIndex] = $jumlah;
+    echo 'diterima bulan : ' . $key->bulan . ', dengan jumlah : ' . $key->jumlah . '<br>';
+  } ?>
+  <?php
+  $gatepassRejectData = array_fill(0, 12, 0);
+  foreach ($ditolak as $key) {
+    $bulanIndex = $key->bulan - 1;
+    $jumlah = $key->jumlah;
+    $gatepassRejectData[$bulanIndex] = $jumlah;
+    echo 'ditolak bulan : ' . $key->bulan . ', dengan jumlah : ' . $key->jumlah . '<br>';
+  } ?>
+  <?php
+  $gatepassRequestData = array_fill(0, 12, 0);
+  foreach ($diajukan as $key) {
+    $bulanIndex = $key->bulan - 1;
+    $jumlah = $key->jumlah;
+    $gatepassRequestData[$bulanIndex] = $jumlah;
+    echo 'diajukan bulan : ' . $key->bulan . ', dengan jumlah : ' . $key->jumlah . '<br>';
+  } ?>
+
+
+  <?php
+  $gatepassAcceptDataLast = array_fill(0, 12, 0);
+  foreach ($diterimaLast as $key) {
+    $bulanIndex = $key->bulan - 1;
+    $jumlah = $key->jumlah;
+    $gatepassAcceptDataLast[$bulanIndex] = $jumlah;
+    echo 'diterima bulan : ' . $key->bulan . ', dengan jumlah : ' . $key->jumlah . '<br>';
+  } ?>
+  <?php
+  $gatepassRejectDataLast = array_fill(0, 12, 0);
+  foreach ($ditolakLast as $key) {
+    $bulanIndex = $key->bulan - 1;
+    $jumlah = $key->jumlah;
+    $gatepassRejectDataLast[$bulanIndex] = $jumlah;
+    echo 'ditolak bulan : ' . $key->bulan . ', dengan jumlah : ' . $key->jumlah . '<br>';
+  } ?>
+  <?php
+  $gatepassRequestDataLast = array_fill(0, 12, 0);
+  foreach ($diajukanLast as $key) {
+    $bulanIndex = $key->bulan - 1;
+    $jumlah = $key->jumlah;
+    $gatepassRequestDataLast[$bulanIndex] = $jumlah;
+    echo 'diajukan bulan : ' . $key->bulan . ', dengan jumlah : ' . $key->jumlah . '<br>';
+  } ?>
+  
   <main class="content px-4 py-4">
     <div class="container-fluid">
       <div class="mb-5 text-center text-uppercase">
@@ -50,6 +102,7 @@
       <button type="button" class="btn btn-danger" id="btn-sig" data-toggle="modal" data-target="#ModalSignature">
         E-Signature
       </button>
+
       <div class="row mb-5 text-white">
         <div class="col-xl-4 col-md-6 col-sm-12 p-2">
           <div class="bg-primary d-flex flex-column p-4 shadow">
@@ -433,14 +486,30 @@
 
 
     var bulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
-
-    // Data gatepass untuk 6 bulan terakhir (contoh)
-    var gatepassRequestData = [10, 20, 15, 26, 30, 35];
-    var gatepassRejectData = [46, 11, 6, 23, 44, 35];
-    var gatepassAcceptData = [23, 31, 11, 52, 30, 12];
-    var gatepassRequestDataLast = [6, 56, 15, 6, 12, 35];
-    var gatepassRejectDataLast = [66, 7, 6, 42, 22, 53];
-    var gatepassAcceptDataLast = [46, 24, 11, 33, 52, 51];
+    var gatepassAcceptData = [];
+    var gatepassRejectData = [];
+    var gatepassRequestData = [];
+    var gatepassAcceptDataLast = [];
+    var gatepassRejectDataLast = [];
+    var gatepassRequestDataLast = [];
+    <?php foreach ($gatepassAcceptData as $index => $jumlah) { ?>
+      gatepassAcceptData.push(<?php echo $jumlah; ?>);
+    <?php } ?>
+    <?php foreach ($gatepassRejectData as $index => $jumlah) { ?>
+      gatepassRejectData.push(<?php echo $jumlah; ?>);
+    <?php } ?>
+    <?php foreach ($gatepassRequestData as $index => $jumlah) { ?>
+      gatepassRequestData.push(<?php echo $jumlah; ?>);
+    <?php } ?>
+    <?php foreach ($gatepassAcceptDataLast as $index => $jumlah) { ?>
+      gatepassAcceptDataLast.push(<?php echo $jumlah; ?>);
+    <?php } ?>
+    <?php foreach ($gatepassRejectDataLast as $index => $jumlah) { ?>
+      gatepassRejectDataLast.push(<?php echo $jumlah; ?>);
+    <?php } ?>
+    <?php foreach ($gatepassRequestDataLast as $index => $jumlah) { ?>
+      gatepassRequestDataLast.push(<?php echo $jumlah; ?>);
+    <?php } ?>
 
     var ctx = document.getElementById('gatepassChart').getContext('2d');
     var ctxLast = document.getElementById('gatepassChartLast').getContext('2d');
