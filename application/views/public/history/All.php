@@ -97,7 +97,7 @@
 
     function YearSelector(select) {
       var selectedYear = select.options[select.selectedIndex].value;
-      window.open('<?= base_url('history/from/') ?>' + selectedYear, '_self')
+      window.open('<?= base_url('all/from/') ?>' + selectedYear, '_self')
     }
   </script>
 </body>
