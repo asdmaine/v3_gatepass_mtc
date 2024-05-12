@@ -15,7 +15,7 @@ if($count > 0){
 	$this->logindata['level'] = 'security';
 }
 $this->logindata['user']['jobtl_name'] = strtoupper($this->logindata['user']['jobtl_name']);
-if(strpos($this->logindata['user']['jobtl_name'],'HR') !== false || strpos($this->logindata['user']['jobtl_name'],'TIME') !== false){
+if(strpos($this->logindata['user']['jobtl_name'],'HR') !== false || strpos($this->logindata['user']['jobtl_name'],'TIME') !== false || strpos($this->logindata['user']['jobtl_name'],'PAYROL') !== false){
 	$this->logindata['hr']=true;
 }
 

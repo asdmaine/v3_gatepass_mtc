@@ -117,6 +117,7 @@
                 <div class="akun shadow-none p-3 bg-light"  data-pst="521073730">Marden S - 521073730</div>
                 <div class="akun shadow-none p-3 bg-light" data-pst="46171029">Aris SH - 46171029</div>
                 <div class="akun shadow-none p-3 bg-light"  data-pst="523023913">Akbar PJ - 523023913</div>
+                <div class="akun shadow-none p-3 bg-light"  data-pst="4607947">Suryanti - 4607947</div>
 
                 <div class="shadow-lg p-3 bg-secondary text-light mt-4">Security</div>
                 <div class="akun shadow-none p-3 bg-light" data-pst="S9220001">Tambi Abdrahman MS - S9220001</div>
