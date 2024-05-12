@@ -156,14 +156,14 @@
           </div> -->
 
 
-          <div class="col-md-6 col-sm-12 p-2">
+          <div class="col-xl-6 col-sm-12 p-2">
             <div class="d-flex flex-column p-4 shadow">
               <h4 class="text-secondary text-center mb-4">Gatepass chart <?= date('Y') ?></h4>
               <canvas id="gatepassChart"></canvas>
               <script src="chart_script.js"></script>
             </div>
           </div>
-          <div class="col-md-6 col-sm-12 p-2">
+          <div class="col-xl-6 col-sm-12 p-2">
             <div class="d-flex flex-column p-4 shadow">
               <h4 class="text-secondary text-center mb-4">Gatepass chart <?= date('Y') - 1 ?></h4>
               <canvas id="gatepassChartLast"></canvas>
