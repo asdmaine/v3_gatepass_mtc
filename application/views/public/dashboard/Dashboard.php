@@ -42,13 +42,13 @@
   ?>
 
   <?php
+  if (isset($this->logindata['hr'])) {
   $bulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
   $gatepassAcceptData = array_fill(0, 12, 0);
   foreach ($diterima as $key) {
     $bulanIndex = $key->bulan - 1;
     $jumlah = $key->jumlah;
     $gatepassAcceptData[$bulanIndex] = $jumlah;
-    echo 'diterima bulan : ' . $key->bulan . ', dengan jumlah : ' . $key->jumlah . '<br>';
   } ?>
   <?php
   $gatepassRejectData = array_fill(0, 12, 0);
@@ -56,7 +56,6 @@
     $bulanIndex = $key->bulan - 1;
     $jumlah = $key->jumlah;
     $gatepassRejectData[$bulanIndex] = $jumlah;
-    echo 'ditolak bulan : ' . $key->bulan . ', dengan jumlah : ' . $key->jumlah . '<br>';
   } ?>
   <?php
   $gatepassRequestData = array_fill(0, 12, 0);
@@ -64,7 +63,6 @@
     $bulanIndex = $key->bulan - 1;
     $jumlah = $key->jumlah;
     $gatepassRequestData[$bulanIndex] = $jumlah;
-    echo 'diajukan bulan : ' . $key->bulan . ', dengan jumlah : ' . $key->jumlah . '<br>';
   } ?>
 
 
@@ -74,7 +72,6 @@
     $bulanIndex = $key->bulan - 1;
     $jumlah = $key->jumlah;
     $gatepassAcceptDataLast[$bulanIndex] = $jumlah;
-    echo 'diterima bulan : ' . $key->bulan . ', dengan jumlah : ' . $key->jumlah . '<br>';
   } ?>
   <?php
   $gatepassRejectDataLast = array_fill(0, 12, 0);
@@ -82,7 +79,6 @@
     $bulanIndex = $key->bulan - 1;
     $jumlah = $key->jumlah;
     $gatepassRejectDataLast[$bulanIndex] = $jumlah;
-    echo 'ditolak bulan : ' . $key->bulan . ', dengan jumlah : ' . $key->jumlah . '<br>';
   } ?>
   <?php
   $gatepassRequestDataLast = array_fill(0, 12, 0);
@@ -90,8 +86,7 @@
     $bulanIndex = $key->bulan - 1;
     $jumlah = $key->jumlah;
     $gatepassRequestDataLast[$bulanIndex] = $jumlah;
-    echo 'diajukan bulan : ' . $key->bulan . ', dengan jumlah : ' . $key->jumlah . '<br>';
-  } ?>
+  }} ?>
   
   <main class="content px-4 py-4">
     <div class="container-fluid">
