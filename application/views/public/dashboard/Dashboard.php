@@ -46,22 +46,19 @@
       <div class="mb-5 text-center text-uppercase">
         <!-- <h4>Dashboard</h4> -->
       </div>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-danger" id="btn-sig" data-toggle="modal" data-target="#ModalSignature">
+        E-Signature
+      </button>
       <div class="row mb-5 text-white">
         <div class="col-xl-4 col-md-6 col-sm-12 p-2">
-          <div style="
-          background: #F0C27B;  /* fallback for old browsers */
-          background: -webkit-linear-gradient(to right, #4B1248, #F0C27B);  /* Chrome 10-25, Safari 5.1-6 */
-          background: linear-gradient(to right, #4B1248, #F0C27B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-          " class="d-flex flex-column p-4 shadow">
+          <div class="bg-primary d-flex flex-column p-4 shadow">
             <h3 class="mb-3"><?= $this->lang->line('Gatepass anda Bulan ini') ?> (<?= date('M') ?>)</h3>
             <h2 class="font-weight-bold mb-0 text-right"><?= $this_month ?></h2>
           </div>
         </div>
         <div class="col-xl-4 col-md-6 col-sm-12 p-2">
-          <div style="background: #2c3e50;  /* fallback for old browsers */
-          background: -webkit-linear-gradient(to right, #3498db, #2c3e50);  /* Chrome 10-25, Safari 5.1-6 */
-          background: linear-gradient(to right, #3498db, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-          " class=" d-flex flex-column p-4 shadow">
+          <div class="bg-primary  d-flex flex-column p-4 shadow">
             <h3 class="mb-3"><?= $this->lang->line('Gatepass anda Bulan lalu') ?> (<?php $date = date('M', strtotime('-1 month'));
                echo $date; ?>)
             </h3>
@@ -69,10 +66,7 @@
           </div>
         </div>
         <div class="col-xl-4 col-md-6 col-sm-12 p-2">
-          <div style="background: #c0392b;  /* fallback for old browsers */
-          background: -webkit-linear-gradient(to right, #8e44ad, #c0392b);  /* Chrome 10-25, Safari 5.1-6 */
-          background: linear-gradient(to right, #8e44ad, #c0392b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-          " class="d-flex flex-column p-4 shadow">
+          <div class="bg-primary d-flex flex-column p-4 shadow">
             <h3 class="mb-3"><?= $this->lang->line('Gatepass anda Tahun ini') ?> (<?= date('Y') ?>)</h3>
             <h2 class="font-weight-bold mb-0 text-right"><?= $this_year ?></h2>
           </div>
@@ -81,7 +75,7 @@
 
         <?php if (isset($this->logindata['hr'])) { ?>
 
-          <div class="col-xl-4 col-md-6 col-sm-12 p-2">
+          <!-- <div class="col-xl-4 col-md-6 col-sm-12 p-2">
             <div style="background: #30E8BF;  /* fallback for old browsers */
             background: -webkit-linear-gradient(to right, #FF8235, #30E8BF);  /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to right, #FF8235, #30E8BF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -91,6 +85,7 @@
             </div>
           </div>
           <div class="col-xl-4 col-md-6 col-sm-12 p-2">
+            <div class="d-flex flex-column p-4 shadow">
             <div style="background: #3a6186;  /* fallback for old browsers */
             background: -webkit-linear-gradient(to right, #89253e, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to right, #89253e, #3a6186); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -110,15 +105,28 @@
               <h3 class="mb-3"><?= $this->lang->line('Total Gatepass Karyawan Tahun ini') ?> (<?= date('Y') ?>)</h3>
               <h2 class="font-weight-bold mb-0 text-right"><?= $all_this_year ?></h2>
             </div>
-          </div>
+          </div> -->
 
+
+          <div class="col-md-6 col-sm-12 p-2">
+            <div class="d-flex flex-column p-4 shadow">
+              <h4 class="text-secondary text-center mb-4">Gatepass chart <?= date('Y') ?></h4>
+              <canvas id="gatepassChart"></canvas>
+              <script src="chart_script.js"></script>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 p-2">
+            <div class="d-flex flex-column p-4 shadow">
+              <h4 class="text-secondary text-center mb-4">Gatepass chart <?= date('Y') - 1 ?></h4>
+              <canvas id="gatepassChartLast"></canvas>
+              <script src="chart_script.js"></script>
+            </div>
+          </div>
         <?php } ?>
       </div>
+
       <hr>
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-info" id="btn-sig" data-toggle="modal" data-target="#ModalSignature">
-        E-Signature
-      </button>
+
 
 
       <!-- table-progress -->
@@ -248,15 +256,16 @@
                     <td class="text-center spacing-2">
                       <div class="btn btn-info m-1" id="OpenModalProgress" data-tanggal="<?= $pg->tanggal_gatepass ?>"
                         data-keperluan="<?= $pg->keperluan ?>" data-penjelasan="<?= $pg->penjelasan_keperluan ?>"
-                        data-est-time-out="<?= $pg->est_time_out ?>" data-est-time-in="<?= $pg->est_time_in ?>" data-recommended="<?= $content_recommended ?>" data-approved="<?= $content_approved ?>" data-acknowledged="<?= $content_acknowledged ?>"><i
-                          class="fa-solid fa-circle-info"></i></div>
+                        data-est-time-out="<?= $pg->est_time_out ?>" data-est-time-in="<?= $pg->est_time_in ?>"
+                        data-recommended="<?= $content_recommended ?>" data-approved="<?= $content_approved ?>"
+                        data-acknowledged="<?= $content_acknowledged ?>"><i class="fa-solid fa-circle-info"></i></div>
                       <div class="btn btn-danger" data-toggle="modal" data-target="#ModalSure<?= $pg->id_gatepass ?>"><i
                           class="fa-solid fa-trash"></i></div>
                     </td>
                   </tr>
                   <!-- Modal sure-->
-                  <div class="modal fade" id="ModalSure<?= $pg->id_gatepass ?>" data-backdrop="static" data-keyboard="false" tabindex="-1"
-                    aria-labelledby="ModalSureLabel" aria-hidden="true">
+                  <div class="modal fade" id="ModalSure<?= $pg->id_gatepass ?>" data-backdrop="static" data-keyboard="false"
+                    tabindex="-1" aria-labelledby="ModalSureLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -341,6 +350,7 @@
 
 
 
+
       <!-- Modal Signature -->
       <div class="modal fade" id="ModalSignature" tabindex="-1" aria-labelledby="ModalSignatureLabel"
         data-backdrop="static" data-keyboard="false" aria-hidden="true">
@@ -380,13 +390,15 @@
                   </div>
                   <div class="row">
                     <div class="col-md-12">
+                      <h5>Signature anda :</h5>
                       <img id="sig-image" src="<?= $this->logindata['user']['signature'] ?>"
                         alt="Anda belum membuat signature, tolong buat signature terlebih dahulu"
                         style="max-width: 100%;" />
                     </div>
                   </div>
                   <p id="sig-alert" class="text-danger" style="display:none;">
-                    <?= $this->lang->line('ekan Tombol Selesai terlebih dahulu') ?></p>
+                    <?= $this->lang->line('ekan Tombol Selesai terlebih dahulu') ?>
+                  </p>
 
               </div>
             </div>
@@ -409,6 +421,8 @@
   </div>
   </div>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   $(document).ready(function () {
     var signSet = <?= $signSet ?>;
@@ -416,7 +430,108 @@
       document.getElementById("x-btn").style.display = 'none';
       document.getElementById("btn-sig").click();
     }
+
+
+    var bulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+
+    // Data gatepass untuk 6 bulan terakhir (contoh)
+    var gatepassRequestData = [10, 20, 15, 26, 30, 35];
+    var gatepassRejectData = [46, 11, 6, 23, 44, 35];
+    var gatepassAcceptData = [23, 31, 11, 52, 30, 12];
+    var gatepassRequestDataLast = [6, 56, 15, 6, 12, 35];
+    var gatepassRejectDataLast = [66, 7, 6, 42, 22, 53];
+    var gatepassAcceptDataLast = [46, 24, 11, 33, 52, 51];
+
+    var ctx = document.getElementById('gatepassChart').getContext('2d');
+    var ctxLast = document.getElementById('gatepassChartLast').getContext('2d');
+    var combinedData = {
+      labels: bulan,
+      datasets: [
+        {
+          label: 'Gatepass Accept',
+          backgroundColor: 'rgba(0, 128, 0, 0.2)',
+          borderColor: 'rgba(0, 128, 0, 1)',
+          borderWidth: 1,
+          data: gatepassAcceptData
+        },
+        {
+          label: 'Gatepass Reject',
+          backgroundColor: 'rgba(255, 0, 0, 0.2)',
+          borderColor: 'rgba(255, 0, 0, 1)',
+          borderWidth: 1,
+          data: gatepassRejectData
+        },
+        {
+          label: 'Gatepass Request',
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1,
+          data: gatepassRequestData
+        }
+      ]
+    };
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: combinedData,
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+
+    combinedDataLast = {
+      labels: bulan,
+      datasets: [
+        {
+          label: 'Gatepass Accept',
+          backgroundColor: 'rgba(0, 128, 0, 0.2)',
+          borderColor: 'rgba(0, 128, 0, 1)',
+          borderWidth: 1,
+          data: gatepassAcceptDataLast
+        },
+        {
+          label: 'Gatepass Reject',
+          backgroundColor: 'rgba(255, 0, 0, 0.2)',
+          borderColor: 'rgba(255, 0, 0, 1)',
+          borderWidth: 1,
+          data: gatepassRejectDataLast
+        },
+        {
+          label: 'Gatepass Request',
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1,
+          data: gatepassRequestDataLast
+        }
+
+
+      ]
+    };
+    var myChartLast = new Chart(ctxLast, {
+      type: 'line',
+      data: combinedDataLast,
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+
+
+
   });
+
+
+
 
 
 
@@ -648,22 +763,19 @@
           <div class="form-group mb-4">
             <label class="form-label font-weight-bold"><?= $this->lang->line('Pengesahan') ?></label><br>
             <div class="input-group mb-1">
-              <input type="text" class="form-control text-light"
-                placeholder="Recommendedby" disabled>
+              <input type="text" class="form-control text-light" placeholder="Recommendedby" disabled>
               <input class="form-control" type="text" id="isi_recommended" value="" disabled>
             </div>
             <div class="input-group mb-1">
-              <input type="text" class="form-control text-light"
-                placeholder="Approvedby" disabled>
+              <input type="text" class="form-control text-light" placeholder="Approvedby" disabled>
               <input class="form-control" type="text" id="isi_approved" value="" disabled>
             </div>
             <div class="input-group mb-4">
-              <input type="text" class="form-control text-light"
-                placeholder="Acknowledgedby" disabled>
+              <input type="text" class="form-control text-light" placeholder="Acknowledgedby" disabled>
               <input class="form-control" type="text" id="isi_acknowledged" value="" disabled>
             </div>
           </div>
-          
+
         </form>
       </div>
     </div>
