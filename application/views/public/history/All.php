@@ -38,6 +38,7 @@
               <tr class="text-center">
                 <th>#</th>
                 <th><?= $this->lang->line('Tanggal') ?></th>
+                <th>Requested by</th>
                 <th><?= $this->lang->line('Keperluan') ?></th>
                 <th>Status</th>
                 <th><?= $this->lang->line('Aksi') ?></th>
@@ -53,6 +54,9 @@
                   </th>
                   <td class="text-center align-middle">
                     <?= $hs->tanggal_gatepass ?>
+                  </td>
+                  <td class="text-center align-middle">
+                    <?= $hs->requestedby_pst_name ?>
                   </td>
                   <td class="align-middle">
                     <?= $hs->keperluan ?>
