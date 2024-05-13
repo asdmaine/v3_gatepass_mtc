@@ -39,55 +39,56 @@
     }
   }
 
-  ?>
-
-  <?php
-  if (isset($this->logindata['hr'])) {
   $bulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
   $gatepassAcceptData = array_fill(0, 12, 0);
-  foreach ($diterima as $key) {
-    $bulanIndex = $key->bulan - 1;
-    $jumlah = $key->jumlah;
-    $gatepassAcceptData[$bulanIndex] = $jumlah;
-  } ?>
-  <?php
   $gatepassRejectData = array_fill(0, 12, 0);
-  foreach ($ditolak as $key) {
-    $bulanIndex = $key->bulan - 1;
-    $jumlah = $key->jumlah;
-    $gatepassRejectData[$bulanIndex] = $jumlah;
-  } ?>
-  <?php
   $gatepassRequestData = array_fill(0, 12, 0);
-  foreach ($diajukan as $key) {
-    $bulanIndex = $key->bulan - 1;
-    $jumlah = $key->jumlah;
-    $gatepassRequestData[$bulanIndex] = $jumlah;
-  } ?>
-
-
-  <?php
   $gatepassAcceptDataLast = array_fill(0, 12, 0);
-  foreach ($diterimaLast as $key) {
-    $bulanIndex = $key->bulan - 1;
-    $jumlah = $key->jumlah;
-    $gatepassAcceptDataLast[$bulanIndex] = $jumlah;
-  } ?>
-  <?php
   $gatepassRejectDataLast = array_fill(0, 12, 0);
-  foreach ($ditolakLast as $key) {
-    $bulanIndex = $key->bulan - 1;
-    $jumlah = $key->jumlah;
-    $gatepassRejectDataLast[$bulanIndex] = $jumlah;
-  } ?>
-  <?php
   $gatepassRequestDataLast = array_fill(0, 12, 0);
-  foreach ($diajukanLast as $key) {
-    $bulanIndex = $key->bulan - 1;
-    $jumlah = $key->jumlah;
-    $gatepassRequestDataLast[$bulanIndex] = $jumlah;
-  }} ?>
-  
+  $hr = 0;
+  if (isset($this->logindata['hr'])) {
+    $hr = 1;
+    foreach ($diterima as $key) {
+      $bulanIndex = $key->bulan - 1;
+      $jumlah = $key->jumlah;
+      $gatepassAcceptData[$bulanIndex] = $jumlah;
+    }
+
+    foreach ($ditolak as $key) {
+      $bulanIndex = $key->bulan - 1;
+      $jumlah = $key->jumlah;
+      $gatepassRejectData[$bulanIndex] = $jumlah;
+    }
+
+    foreach ($diajukan as $key) {
+      $bulanIndex = $key->bulan - 1;
+      $jumlah = $key->jumlah;
+      $gatepassRequestData[$bulanIndex] = $jumlah;
+    } ?>
+
+
+    <?php
+
+    foreach ($diterimaLast as $key) {
+      $bulanIndex = $key->bulan - 1;
+      $jumlah = $key->jumlah;
+      $gatepassAcceptDataLast[$bulanIndex] = $jumlah;
+    }
+
+    foreach ($ditolakLast as $key) {
+      $bulanIndex = $key->bulan - 1;
+      $jumlah = $key->jumlah;
+      $gatepassRejectDataLast[$bulanIndex] = $jumlah;
+    }
+
+    foreach ($diajukanLast as $key) {
+      $bulanIndex = $key->bulan - 1;
+      $jumlah = $key->jumlah;
+      $gatepassRequestDataLast[$bulanIndex] = $jumlah;
+    }
+  } ?>
+
   <main class="content px-4 py-4">
     <div class="container-fluid">
       <div class="mb-5 text-center text-uppercase">
@@ -479,117 +480,118 @@
       document.getElementById("btn-sig").click();
     }
 
+    var hr = <?= $hr ?>;
+    if (hr == 1) {
+      var bulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+      var gatepassAcceptData = [];
+      var gatepassRejectData = [];
+      var gatepassRequestData = [];
+      var gatepassAcceptDataLast = [];
+      var gatepassRejectDataLast = [];
+      var gatepassRequestDataLast = [];
+      <?php foreach ($gatepassAcceptData as $index => $jumlah) { ?>
+        gatepassAcceptData.push(<?php echo $jumlah; ?>);
+      <?php } ?>
+      <?php foreach ($gatepassRejectData as $index => $jumlah) { ?>
+        gatepassRejectData.push(<?php echo $jumlah; ?>);
+      <?php } ?>
+      <?php foreach ($gatepassRequestData as $index => $jumlah) { ?>
+        gatepassRequestData.push(<?php echo $jumlah; ?>);
+      <?php } ?>
+      <?php foreach ($gatepassAcceptDataLast as $index => $jumlah) { ?>
+        gatepassAcceptDataLast.push(<?php echo $jumlah; ?>);
+      <?php } ?>
+      <?php foreach ($gatepassRejectDataLast as $index => $jumlah) { ?>
+        gatepassRejectDataLast.push(<?php echo $jumlah; ?>);
+      <?php } ?>
+      <?php foreach ($gatepassRequestDataLast as $index => $jumlah) { ?>
+        gatepassRequestDataLast.push(<?php echo $jumlah; ?>);
+      <?php } ?>
 
-    var bulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
-    var gatepassAcceptData = [];
-    var gatepassRejectData = [];
-    var gatepassRequestData = [];
-    var gatepassAcceptDataLast = [];
-    var gatepassRejectDataLast = [];
-    var gatepassRequestDataLast = [];
-    <?php foreach ($gatepassAcceptData as $index => $jumlah) { ?>
-      gatepassAcceptData.push(<?php echo $jumlah; ?>);
-    <?php } ?>
-    <?php foreach ($gatepassRejectData as $index => $jumlah) { ?>
-      gatepassRejectData.push(<?php echo $jumlah; ?>);
-    <?php } ?>
-    <?php foreach ($gatepassRequestData as $index => $jumlah) { ?>
-      gatepassRequestData.push(<?php echo $jumlah; ?>);
-    <?php } ?>
-    <?php foreach ($gatepassAcceptDataLast as $index => $jumlah) { ?>
-      gatepassAcceptDataLast.push(<?php echo $jumlah; ?>);
-    <?php } ?>
-    <?php foreach ($gatepassRejectDataLast as $index => $jumlah) { ?>
-      gatepassRejectDataLast.push(<?php echo $jumlah; ?>);
-    <?php } ?>
-    <?php foreach ($gatepassRequestDataLast as $index => $jumlah) { ?>
-      gatepassRequestDataLast.push(<?php echo $jumlah; ?>);
-    <?php } ?>
-
-    var ctx = document.getElementById('gatepassChart').getContext('2d');
-    var ctxLast = document.getElementById('gatepassChartLast').getContext('2d');
-    var combinedData = {
-      labels: bulan,
-      datasets: [
-        {
-          label: 'Gatepass Accept',
-          backgroundColor: 'rgba(0, 128, 0, 0.2)',
-          borderColor: 'rgba(0, 128, 0, 1)',
-          borderWidth: 1,
-          data: gatepassAcceptData
-        },
-        {
-          label: 'Gatepass Reject',
-          backgroundColor: 'rgba(255, 0, 0, 0.2)',
-          borderColor: 'rgba(255, 0, 0, 1)',
-          borderWidth: 1,
-          data: gatepassRejectData
-        },
-        {
-          label: 'Gatepass Request',
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 1,
-          data: gatepassRequestData
+      var ctx = document.getElementById('gatepassChart').getContext('2d');
+      var ctxLast = document.getElementById('gatepassChartLast').getContext('2d');
+      var combinedData = {
+        labels: bulan,
+        datasets: [
+          {
+            label: 'Gatepass Accept',
+            backgroundColor: 'rgba(0, 128, 0, 0.2)',
+            borderColor: 'rgba(0, 128, 0, 1)',
+            borderWidth: 1,
+            data: gatepassAcceptData
+          },
+          {
+            label: 'Gatepass Reject',
+            backgroundColor: 'rgba(255, 0, 0, 0.2)',
+            borderColor: 'rgba(255, 0, 0, 1)',
+            borderWidth: 1,
+            data: gatepassRejectData
+          },
+          {
+            label: 'Gatepass Request',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+            data: gatepassRequestData
+          }
+        ]
+      };
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: combinedData,
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
         }
-      ]
-    };
-    var myChart = new Chart(ctx, {
-      type: 'line',
-      data: combinedData,
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
+      });
+
+      combinedDataLast = {
+        labels: bulan,
+        datasets: [
+          {
+            label: 'Gatepass Accept',
+            backgroundColor: 'rgba(0, 128, 0, 0.2)',
+            borderColor: 'rgba(0, 128, 0, 1)',
+            borderWidth: 1,
+            data: gatepassAcceptDataLast
+          },
+          {
+            label: 'Gatepass Reject',
+            backgroundColor: 'rgba(255, 0, 0, 0.2)',
+            borderColor: 'rgba(255, 0, 0, 1)',
+            borderWidth: 1,
+            data: gatepassRejectDataLast
+          },
+          {
+            label: 'Gatepass Request',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+            data: gatepassRequestDataLast
+          }
+
+
+        ]
+      };
+      var myChartLast = new Chart(ctxLast, {
+        type: 'line',
+        data: combinedDataLast,
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
         }
-      }
-    });
-
-    combinedDataLast = {
-      labels: bulan,
-      datasets: [
-        {
-          label: 'Gatepass Accept',
-          backgroundColor: 'rgba(0, 128, 0, 0.2)',
-          borderColor: 'rgba(0, 128, 0, 1)',
-          borderWidth: 1,
-          data: gatepassAcceptDataLast
-        },
-        {
-          label: 'Gatepass Reject',
-          backgroundColor: 'rgba(255, 0, 0, 0.2)',
-          borderColor: 'rgba(255, 0, 0, 1)',
-          borderWidth: 1,
-          data: gatepassRejectDataLast
-        },
-        {
-          label: 'Gatepass Request',
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 1,
-          data: gatepassRequestDataLast
-        }
-
-
-      ]
-    };
-    var myChartLast = new Chart(ctxLast, {
-      type: 'line',
-      data: combinedDataLast,
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
-    });
-
+      });
+    }
 
 
   });
