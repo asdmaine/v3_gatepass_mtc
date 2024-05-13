@@ -791,7 +791,7 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content px-4">
       <div class="modal-header">
-        <h5 class="modal-title w-100 text-center" id="exampleModalLabel">Detail Gatepaeess</h5>
+        <h5 class="modal-title w-100 text-center" id="exampleModalLabel">Detail Gatepass</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
