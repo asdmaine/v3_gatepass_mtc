@@ -54,6 +54,7 @@
                                   <input type="text" name="qrcode" value="<?= $qrcode ?>" hidden>
                                   <input type="text" name="id_verifikasi" value="<?= $id_verifikasi ?>" hidden>
                                   <input type="text" name="id_gatepass" value="<?= $id_gatepass ?>" hidden>
+                                  <input type="text" name="id_remarks" value="<?= $id_remarks ?>" hidden>
                                 
                                     <textarea id="sig-dataUrl" class="form-control" name="signature" rows="5" hidden
                                         required></textarea>
