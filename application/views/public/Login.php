@@ -100,9 +100,11 @@
         <div class="row">
             <div class="mx-auto w-50">
                 <div class="shadow-lg p-3 bg-secondary text-light mt-4">Normal</div>
-                <div class="akun shadow-none p-3 bg-light" data-pst="523124075">Firman Barus - 523124075</div>
+                <div class="akun shadow-none p-3 bg-light" data-pst="4601489">JEPRY HUTAJULU - 4601489</div>
+                <div class="akun shadow-none p-3 bg-light" data-pst="4602777">Wawan Suwandi - 4602777</div>
                 
                 <div class="shadow-lg p-3 bg-secondary text-light mt-4">Supervisor</div>
+                <div class="akun shadow-none p-3 bg-light" data-pst="523124075">Firman Barus - 523124075</div>
                 <div class="akun shadow-none p-3 bg-light"  data-pst="4698073">Agus Widodo - 4698073</div>
                 <div class="akun shadow-none p-3 bg-light"  data-pst="46211035">Haryanto - 46211035</div>
                 <div class="akun shadow-none p-3 bg-light"  data-pst="4608937">Kusbiantoro Effendi - 4608937</div>
@@ -112,6 +114,9 @@
                 <div class="akun shadow-none p-3 bg-light"  data-pst="4600318">M. Sunarto - 4600318</div>
                 <div class="akun shadow-none p-3 bg-light"  data-pst="46221041">Teddy Ariswandi - 46221041</div>
                 <div class="akun shadow-none p-3 bg-light"  data-pst="46191032">Melinda - 46191032</div>
+                <div class="akun shadow-none p-3 bg-light"  data-pst="523033917">Marc Knutt W - 523033917</div>
+                <div class="akun shadow-none p-3 bg-light"  data-pst="4600441">Yosep Pati - 4600441</div>
+                
 
                 <div class="shadow-lg p-3 bg-secondary text-light mt-4">HRD/HOD HRD</div>
                 <div class="akun shadow-none p-3 bg-light"  data-pst="521073730">Marden S - 521073730</div>
